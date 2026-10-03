@@ -419,7 +419,7 @@
     </header>
 
     <div class="container">
-        <!-- KOTAK QUOTES DINAMIS (DAPAT DIKLIK & OTOMATIS BERGANTI TIAP 10 DETIK) -->
+        <!-- KOTAK QUOTES DINAMIS -->
         <div class="quote-container" id="quoteBox">
             <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
             <p class="quote-text" id="quoteText">"Memuat kata-kata..."</p>
@@ -579,7 +579,7 @@
         </div>
     </footer>
 
-    <!-- SKRIP SINKRONISASI MUSIK YANG DISEMPURNAKAN -->
+    <!-- SKRIP SINKRONISASI MUSIK ANTAR HALAMAN (DIPERKUAT) -->
     <script>
         (function() {
             const audio = document.getElementById('bgMusic');
@@ -592,22 +592,28 @@
                 audio.currentTime = parseFloat(savedTime);
             }
 
-            const saveCurrentState = () => {
+            const saveAudioState = () => {
                 localStorage.setItem('musicCurrentTime', audio.currentTime);
                 localStorage.setItem('musicIsPlaying', !audio.paused ? 'true' : 'false');
             };
 
-            audio.addEventListener('timeupdate', saveCurrentState);
-            window.addEventListener('beforeunload', saveCurrentState);
-            window.addEventListener('pagehide', saveCurrentState);
+            // Simpan otomatis setiap detik agar durasi tidak terlewat saat berpindah halaman
+            let saveInterval = setInterval(() => {
+                if (!audio.paused) {
+                    saveAudioState();
+                }
+            }, 1000);
 
+            audio.addEventListener('timeupdate', saveAudioState);
             audio.addEventListener('play', () => {
                 localStorage.setItem('musicIsPlaying', 'true');
             });
-
             audio.addEventListener('pause', () => {
                 localStorage.setItem('musicIsPlaying', 'false');
             });
+
+            window.addEventListener('beforeunload', saveAudioState);
+            window.addEventListener('pagehide', saveAudioState);
 
             if (isPlaying === 'true') {
                 audio.play().catch(() => {
@@ -623,7 +629,7 @@
         })();
     </script>
 
-    <!-- SKRIP ROTASI QUOTES (10 DETIK) -->
+    <!-- SKRIP ROTASI QUOTES -->
     <script>
         (function() {
             const listQuotes = [
