@@ -271,6 +271,29 @@
             flex-grow: 1;
         }
 
+        /* STYLING WIDGET MUSIK MELAYANG */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 8px 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .audio-player audio {
+            height: 35px;
+            outline: none;
+        }
+
         /* KHUSUS PERANGKAT HP / MOBILE */
         @media (max-width: 640px) {
             .students-grid {
@@ -284,6 +307,12 @@
             }
             .student-info, .student-motivation {
                 font-size: 0.75rem;
+            }
+            .audio-player {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
             }
         }
 
@@ -512,6 +541,15 @@
 
     </div>
 
+    <!-- PEMUTAR MUSIK LATAR -->
+    <div class="audio-player">
+        <i class="fa-solid fa-music" style="color: #818cf8;"></i>
+        <audio controls autoplay loop>
+            <source src="menari.mp3" type="audio/mpeg">
+            Browser Anda tidak mendukung pemutar audio.
+        </audio>
+    </div>
+
     <!-- FOOTER -->
     <footer>
         <div class="footer-container">
@@ -543,30 +581,4 @@
                 author: "— Kebersamaan XII IPS-1"
             },
             {
-                text: "Bukan tentang ke mana kita pergi, melainkan dengan siapa kita berbagi perjalanan ini.",
-                author: "— Keluarga IPS-1"
-            },
-            {
-                text: "Suatu hari nanti, kita akan merindukan ruang kelas yang bising ini.",
-                author: "— Kenangan Masa Sekolah"
-            },
-            {
-                text: "Teman sejati tidak hanya hadir saat tertawa, tapi juga bertahan di setiap perjuangan.",
-                author: "— Persahabatan IPS-1"
-            },
-            {
-                text: "Teruslah berjuang, hari ini kita belajar bersama, esok kita sukses bersama.",
-                author: "— Semangat Lulus"
-            },
-            {
-                text: "Simpan cerita ini, kelak akan menjadi alasan terbaik untuk kita tersenyum kembali.",
-                author: "— Catatan Akhir Sekolah"
-            }
-        ];
-
-        function displayRandomQuote() {
-            const randomIndex = Math.floor(Math.random() * quotesList.length);
-            const selectedQuote = quotesList[randomIndex];
-            
-            document.getElementById('quoteText').textContent = `"${selectedQuote.text}"`;
-            document.g
+                text: "Bukan tentang ke
