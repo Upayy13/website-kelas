@@ -21,18 +21,33 @@
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 30px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 20px;
+            padding: 35px 30px;
             width: 100%;
-            max-width: 500px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 480px;
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Ambient Light Effect */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
+            pointer-events: none;
         }
 
         h2 {
             text-align: center;
+            margin-top: 0;
             margin-bottom: 20px;
             color: #38bdf8;
         }
@@ -57,10 +72,16 @@
             color: #fff;
             box-sizing: border-box;
             outline: none;
+            transition: border-color 0.3s;
         }
 
         input:focus, select:focus, textarea:focus {
             border-color: #38bdf8;
+        }
+
+        input:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
 
         option {
@@ -77,122 +98,282 @@
 
         .checkbox-group input {
             width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            cursor: pointer;
         }
 
         button {
             width: 100%;
             padding: 12px;
-            background: #0284c7;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: bold;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
         }
 
         button:hover {
-            background: #0369a1;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+            background: linear-gradient(135deg, #0369a1, #075985);
         }
 
-        .alert {
-            display: none;
-            padding: 10px;
-            background: rgba(34, 197, 94, 0.2);
-            border: 1px solid #22c55e;
-            color: #4ade80;
-            border-radius: 8px;
+        button:disabled {
+            background: #64748b;
+            cursor: wait;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .footer-note {
+            margin-top: 20px;
             text-align: center;
+            font-size: 0.85em;
+            color: #94a3b8;
+            line-height: 1.5;
+        }
+
+        .footer-note strong {
+            color: #38bdf8;
+        }
+
+        /* Tampilan Kartu Ucapan Terima Kasih Menyentuh */
+        .thank-you-card {
+            display: none;
+            text-align: center;
+            padding: 10px 0;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .badge-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 20px auto;
+            font-size: 32px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .subtitle {
+            font-size: 0.85em;
+            color: #94a3b8;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .thank-you-card h3 {
+            color: #38bdf8;
+            margin-top: 0;
             margin-bottom: 15px;
+            font-size: 1.5em;
+            letter-spacing: 0.5px;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            margin: 20px 0;
+        }
+
+        .message {
+            color: #e2e8f0;
+            line-height: 1.7;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            text-align: justify;
+            text-align-last: center;
+        }
+
+        .quote-box {
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 3px solid #38bdf8;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #cbd5e1;
+            font-size: 0.88em;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.18);
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
 
     <div class="glass-card">
-        <h2>Form Pengaduan XII IPS-1</h2>
-        
-        <div id="successAlert" class="alert">
-            Pengaduan berhasil dikirim!
+        <!-- Form Utama -->
+        <div id="formContainer">
+            <h2>Form Pengaduan XII IPS-1</h2>
+
+            <form id="complaintForm">
+                <div class="form-group">
+                    <label for="reporter">Nama Pelapor (Opsional)</label>
+                    <input type="text" id="reporter" placeholder="Masukkan nama kamu...">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="anonymousCheck">
+                    <label for="anonymousCheck" style="margin:0;">Kirim sebagai Anonim (Sembunyikan Nama)</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="reported">Siswa / Pihak yang Dilaporkan *</label>
+                    <input type="text" id="reported" required placeholder="Nama siswa terlaporkan">
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Kategori Pengaduan *</label>
+                    <select id="category" required>
+                        <option value="" disabled selected>Pilih Kategori</option>
+                        <option value="Kedisiplinan">Kedisiplinan</option>
+                        <option value="Fasilitas Kelas">Fasilitas Kelas</option>
+                        <option value="Kenyamanan / Bullying">Kenyamanan / Bullying</option>
+                        <option value="Akademik / Kebersihan">Akademik / Kebersihan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Detail Kejadian / Aspirasi *</label>
+                    <textarea id="description" rows="5" required placeholder="Jelaskan secara jelas tanpa batasan panjang tulisan..."></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn">Kirim Pengaduan</button>
+            </form>
+
+            <p class="footer-note">
+                🔒 <strong>Tidak perlu takut melapor.</strong> Identitas Anda aman dan pesan dapat dikirimkan secara anonim (rahasia).
+            </p>
         </div>
 
-        <form id="complaintForm">
-            <div class="form-group">
-                <label for="reporter">Nama Pelapor (Opsional)</label>
-                <input type="text" id="reporter" placeholder="Masukkan nama kamu...">
+        <!-- Tampilan Ucapan Terima Kasih & Apresiasi Menyentuh -->
+        <div id="thankYouContainer" class="thank-you-card">
+            <div class="badge-icon">🛡️</div>
+            
+            <div class="subtitle">Suaramu Sangat Berarti</div>
+            <h3>Terima Kasih Atas Keberanianmu</h3>
+            
+            <div class="divider"></div>
+
+            <p class="message">
+                Tidak semua orang berani mengambil langkah untuk bersuara. Laporan yang kamu kirimkan adalah bentuk keperdulian nyata agar lingkungan belajar kita tetap aman, adil, dan menghargai satu sama lain.
+            </p>
+
+            <div class="quote-box">
+                "Satu suara yang jujur bisa menjadi awal dari perubahan besar demi kenyamanan bersama."
             </div>
 
-            <div class="checkbox-group">
-                <input type="checkbox" id="anonymousCheck">
-                <label for="anonymousCheck" style="margin:0;">Kirim sebagai Anonim (Rahasia)</label>
-            </div>
+            <p class="message" style="font-size: 0.88em; color: #94a3b8; margin-bottom: 25px;">
+                Pesanmu telah tersimpan rapi dan akan ditindaklanjuti dengan bijak. Terima kasih sudah menjaga ruang kelas <strong>XII IPS-1</strong>.
+            </p>
 
-            <div class="form-group">
-                <label for="reported">Siswa yang Dilaporkan *</label>
-                <input type="text" id="reported" required placeholder="Nama siswa terlaporkan">
-            </div>
-
-            <div class="form-group">
-                <label for="category">Kategori Pengaduan *</label>
-                <select id="category" required>
-                    <option value="" disabled selected>Pilih Kategori</option>
-                    <option value="Kedisiplinan">Kedisiplinan</option>
-                    <option value="Fasilitas Kelas">Fasilitas Kelas</option>
-                    <option value="Kenyamanan / Bullying">Kenyamanan / Bullying</option>
-                    <option value="Lainnya">Lainnya</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="description">Detail Kejadian / Aspirasi *</label>
-                <textarea id="description" rows="4" required placeholder="Jelaskan secara singkat dan jelas..."></textarea>
-            </div>
-
-            <button type="submit">Kirim Pengaduan</button>
-        </form>
+            <button class="btn-secondary" onclick="resetPage()">Kirim Pengaduan Lain</button>
+        </div>
     </div>
 
     <script>
-        // Inisialisasi EmailJS dengan Public Key Anda
         emailjs.init("zA_CHW2hVj2gy4WSa");
 
+        const anonymousCheck = document.getElementById('anonymousCheck');
+        const reporterInput = document.getElementById('reporter');
+        const submitBtn = document.getElementById('submitBtn');
+        const formContainer = document.getElementById('formContainer');
+        const thankYouContainer = document.getElementById('thankYouContainer');
+
+        // Fitur Anonim
+        anonymousCheck.addEventListener('change', function() {
+            if (this.checked) {
+                reporterInput.value = '';
+                reporterInput.disabled = true;
+                reporterInput.placeholder = "Identitas dirahasiakan (Anonim)";
+            } else {
+                reporterInput.disabled = false;
+                reporterInput.placeholder = "Masukkan nama kamu...";
+            }
+        });
+
+        // Submit Form
         document.getElementById('complaintForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const isAnonymous = document.getElementById('anonymousCheck').checked;
-            const reporterInput = document.getElementById('reporter').value.trim();
-            const reporterName = isAnonymous || !reporterInput ? "Anonim" : reporterInput;
+            const confirmSubmit = confirm("Apakah Anda yakin ingin mengirim pengaduan ini?");
+            if (!confirmSubmit) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "Mengirim...";
+
+            const isAnonymous = anonymousCheck.checked;
+            const reporterValue = reporterInput.value.trim();
+            const reporterName = isAnonymous || !reporterValue ? "Anonim (Rahasia)" : reporterValue;
             
             const reportedName = document.getElementById('reported').value;
             const category = document.getElementById('category').value;
             const description = document.getElementById('description').value;
-            const alertBox = document.getElementById('successAlert');
 
-            // Parameter data yang dikirim ke EmailJS
+            const now = new Date();
+            const timeSent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
+
             const emailParams = {
                 from_name: reporterName,
                 reported_person: reportedName,
                 category: category,
-                message: description
+                message: description,
+                timestamp: timeSent
             };
 
-            // Kirim Email via EmailJS
             emailjs.send('Upayy', 'template_ec614ce', emailParams)
                 .then(function(response) {
                     console.log('Email Sent!', response.status, response.text);
                     
-                    // Tampilkan notifikasi sukses & reset form
-                    alertBox.style.display = 'block';
+                    // Transisi ke Tampilan Ucapan Apresiasi
+                    formContainer.style.display = 'none';
+                    thankYouContainer.style.display = 'block';
                     document.getElementById('complaintForm').reset();
-
-                    setTimeout(() => {
-                        alertBox.style.display = 'none';
-                    }, 4000);
                 }, function(error) {
                     console.error('Error Email:', error);
                     alert('Gagal mengirim pengaduan, silakan coba lagi.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "Kirim Pengaduan";
                 });
         });
+
+        // Kembali ke form awal
+        function resetPage() {
+            thankYouContainer.style.display = 'none';
+            formContainer.style.display = 'block';
+            submitBtn.disabled = false;
+            submitBtn.innerText = "Kirim Pengaduan";
+            reporterInput.disabled = false;
+        }
     </script>
 </body>
 </html>
