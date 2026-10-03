@@ -552,7 +552,7 @@
     <!-- PEMUTAR MUSIK LATAR -->
     <div class="audio-player">
         <i class="fa-solid fa-music" style="color: #818cf8;"></i>
-        <audio id="bgMusic" controls loop>
+        <audio id="bgMusic" controls loop preload="auto">
             <source src="menari.mp3" type="audio/mpeg">
             Browser Anda tidak mendukung pemutar audio.
         </audio>
@@ -581,7 +581,51 @@
         </div>
     </footer>
 
-    <!-- SKRIP ROTASI QUOTES (10 DETIK & INSTANT RELOAD) -->
+    <!-- SKRIP SINKRONISASI MUSIK (LOCALSTORAGE) -->
+    <script>
+        (function() {
+            const audio = document.getElementById('bgMusic');
+            if (!audio) return;
+
+            // 1. Ambil posisi detik terakhir dan status audio dari memori browser
+            const savedTime = localStorage.getItem('musicCurrentTime');
+            const isPlaying = localStorage.getItem('musicIsPlaying');
+
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            // 2. Simpan detik audio secara terus-menerus saat lagu berputar
+            audio.addEventListener('timeupdate', () => {
+                localStorage.setItem('musicCurrentTime', audio.currentTime);
+            });
+
+            // 3. Simpan status play/pause saat pengguna menekan tombol audio
+            audio.addEventListener('play', () => {
+                localStorage.setItem('musicIsPlaying', 'true');
+            });
+
+            audio.addEventListener('pause', () => {
+                localStorage.setItem('musicIsPlaying', 'false');
+            });
+
+            // 4. Jika sebelumnya lagu diputar, teruskan pemutaran otomatis di halaman baru
+            if (isPlaying === 'true') {
+                audio.play().catch(() => {
+                    // Penanganan aturan autoplay browser (perlu 1x interaksi jika terblokir)
+                    const resumeAudio = () => {
+                        if (localStorage.getItem('musicIsPlaying') === 'true') {
+                            audio.play();
+                        }
+                        document.removeEventListener('click', resumeAudio);
+                    };
+                    document.addEventListener('click', resumeAudio);
+                });
+            }
+        })();
+    </script>
+
+    <!-- SKRIP ROTASI QUOTES (10 DETIK) -->
     <script>
         (function() {
             const listQuotes = [
@@ -656,7 +700,6 @@
 
             function startTimer() {
                 if (timerId) clearInterval(timerId);
-                // Timer berganti otomatis setiap 10 detik (10000ms)
                 timerId = setInterval(renderQuote, 10000);
             }
 
@@ -680,4 +723,5 @@
         })();
     </script>
 </body>
-</html>
+    </html>
+    
