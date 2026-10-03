@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pengaduan - XII IPS-1</title>
+    <!-- FONT AWESOME UNTUK IKON MUSIK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
@@ -16,7 +18,7 @@
             justify-content: center;
             align-items: center;
             margin: 0;
-            padding: 20px;
+            padding: 20px 20px 80px 20px;
         }
 
         .glass-card {
@@ -246,6 +248,38 @@
             background: rgba(255, 255, 255, 0.18);
             box-shadow: none;
         }
+
+        /* STYLING WIDGET MUSIK MELAYANG */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 8px 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .audio-player audio {
+            height: 35px;
+            outline: none;
+        }
+
+        @media (max-width: 640px) {
+            .audio-player {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -344,6 +378,15 @@
         </div>
     </div>
 
+    <!-- PEMUTAR MUSIK LATAR -->
+    <div class="audio-player">
+        <i class="fa-solid fa-music" style="color: #38bdf8;"></i>
+        <audio id="bgMusicForm" controls loop>
+            <source src="menari.mp3" type="audio/mpeg">
+            Browser Anda tidak mendukung pemutar audio.
+        </audio>
+    </div>
+
     <script>
         emailjs.init("zA_CHW2hVj2gy4WSa");
 
@@ -426,6 +469,32 @@
             submitBtn.innerText = "Kirim Pengaduan";
             reporterInput.disabled = false;
         }
+
+        /* SKRIP PENYELARASAN DETIK MUSIK "MENARI.MP3" */
+        const audio = document.getElementById('bgMusicForm');
+
+        // Ambil detik terakhir khusus untuk lagu menari.mp3
+        const savedTime = localStorage.getItem('menariCurrentTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Simpan posisi lagu secara terus-menerus
+        audio.addEventListener('timeupdate', () => {
+            localStorage.setItem('menariCurrentTime', audio.currentTime);
+        });
+
+        // Putar audio secara otomatis
+        window.addEventListener('load', () => {
+            audio.play().catch(() => {});
+        });
+
+        // Pemulihan otomatis jika diblokir oleh kebijakan browser
+        document.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
     </script>
 </body>
 </html>

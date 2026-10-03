@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FONT AWESOME UNTUK IKON MUSIK -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -168,6 +171,38 @@
             font-size: 0.975rem;
         }
 
+        /* STYLING WIDGET MUSIK MELAYANG */
+        .audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(30, 41, 59, 0.85);
+            border: 1px solid rgba(129, 140, 248, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 30px;
+            padding: 8px 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .audio-player audio {
+            height: 35px;
+            outline: none;
+        }
+
+        @media (max-width: 640px) {
+            .audio-player {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                justify-content: center;
+            }
+        }
+
         /* 2. STYLING ANIMASI SCROLL REVEAL */
         .reveal {
             opacity: 0;
@@ -253,7 +288,16 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL -->
+    <!-- PEMUTAR MUSIK LATAR -->
+    <div class="audio-player">
+        <i class="fa-solid fa-music" style="color: #818cf8;"></i>
+        <audio id="bgMusicClassmeeting" controls loop>
+            <source src="menari.mp3" type="audio/mpeg">
+            Browser Anda tidak mendukung pemutar audio.
+        </audio>
+    </div>
+
+    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL & PENYELARASAN MUSIK -->
     <script>
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
@@ -273,6 +317,32 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
+
+        /* SKRIP PENYELARASAN DETIK MUSIK "MENARI.MP3" */
+        const audio = document.getElementById('bgMusicClassmeeting');
+
+        // Ambil detik terakhir khusus untuk lagu menari.mp3
+        const savedTime = localStorage.getItem('menariCurrentTime');
+        if (savedTime) {
+            audio.currentTime = parseFloat(savedTime);
+        }
+
+        // Simpan posisi lagu secara terus-menerus
+        audio.addEventListener('timeupdate', () => {
+            localStorage.setItem('menariCurrentTime', audio.currentTime);
+        });
+
+        // Putar audio secara otomatis
+        window.addEventListener('load', () => {
+            audio.play().catch(() => {});
+        });
+
+        // Pemulihan otomatis jika diblokir oleh kebijakan browser
+        document.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            }
+        }, { once: true });
     </script>
 
 </body>
