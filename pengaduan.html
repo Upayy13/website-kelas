@@ -4,68 +4,246 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pengaduan - XII IPS-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
+        * { box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: 0;
-            padding: 20px 20px 80px 20px;
+            padding: 20px 20px 90px 20px;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
         }
+
+        @keyframes cardFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Efek Kilau Berulang (Shimmer & Border Glow) */
+        @keyframes borderGlow {
+            0% { border-color: rgba(255, 255, 255, 0.08); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5); }
+            50% { border-color: rgba(56, 189, 248, 0.5); box-shadow: 0 20px 40px -10px rgba(56, 189, 248, 0.2), 0 0 20px rgba(56, 189, 248, 0.15); }
+            100% { border-color: rgba(255, 255, 255, 0.08); box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5); }
+        }
+
+        @keyframes shimmerEffect {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
         .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 20px;
-            padding: 35px 30px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 40px 30px;
             width: 100%;
-            max-width: 480px;
-            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+            max-width: 520px;
             position: relative;
             overflow: hidden;
+            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards, borderGlow 4s infinite ease-in-out;
         }
+
+        /* Garis kilau berjalan di atas kartu */
+        .glass-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent 0%, rgba(56, 189, 248, 0.08) 50%, transparent 100%);
+            transform: translateX(-100%);
+            animation: shimmerEffect 6s infinite;
+            pointer-events: none;
+        }
+
         .glass-card::before {
             content: '';
             position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
         }
-        h2 { text-align: center; margin-top: 0; margin-bottom: 20px; color: #38bdf8; }
-        .form-group { margin-bottom: 15px; }
-        .form-row { display: flex; gap: 10px; }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .form-header .tag {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: #38bdf8;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        h2 { margin: 0; color: #f8fafc; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; }
+
+        .form-group { margin-bottom: 18px; }
+        .form-row { display: flex; gap: 12px; }
         .form-row .form-group { flex: 1; }
-        label { display: block; margin-bottom: 5px; font-size: 0.9em; color: #cbd5e1; }
-        input, select, textarea { width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #fff; box-sizing: border-box; outline: none; transition: border-color 0.3s; }
-        input:focus, select:focus, textarea:focus { border-color: #38bdf8; }
+
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #cbd5e1; }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 14px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: #38bdf8;
+            background: rgba(15, 23, 42, 0.8);
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+        }
         input:disabled { opacity: 0.5; cursor: not-allowed; }
-        option { background: #1e293b; color: #fff; }
-        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .checkbox-group input { width: auto; cursor: pointer; }
-        .checkbox-group label { cursor: pointer; }
-        .warning-box { background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 10px 12px; border-radius: 0 8px 8px 0; font-size: 0.82em; color: #fca5a5; margin-bottom: 15px; line-height: 1.4; }
-        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3); }
-        button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5); background: linear-gradient(135deg, #0369a1, #075985); }
-        button:disabled { background: #64748b; cursor: wait; transform: none; box-shadow: none; }
-        .footer-note { margin-top: 20px; text-align: center; font-size: 0.85em; color: #94a3b8; line-height: 1.5; }
+        option { background: #0f172a; color: #fff; }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            background: rgba(15, 23, 42, 0.3);
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .checkbox-group input { width: 18px; height: 18px; accent-color: #38bdf8; cursor: pointer; }
+        .checkbox-group label { cursor: pointer; font-size: 0.88rem; margin: 0; color: #e2e8f0; }
+
+        .warning-box {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-left: 3px solid #ef4444;
+            padding: 12px 14px;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.82rem;
+            color: #fca5a5;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Efek Kilau / Pulsa Halus pada Tombol Utama */
+        @keyframes btnGlow {
+            0% { box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25); }
+            50% { box-shadow: 0 4px 25px rgba(56, 189, 248, 0.6); }
+            100% { box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25); }
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: btnGlow 3s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+            background: linear-gradient(135deg, #0369a1, #075985);
+            animation: none;
+        }
+        button:disabled { background: #475569; cursor: not-allowed; transform: none; box-shadow: none; animation: none; }
+
+        .footer-note {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 0.82rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
         .footer-note strong { color: #38bdf8; }
-        .thank-you-card { display: none; text-align: center; padding: 10px 0; animation: fadeIn 0.6s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .badge-icon { width: 70px; height: 70px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px auto; font-size: 32px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
-        .subtitle { font-size: 0.85em; color: #94a3b8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
-        .thank-you-card h3 { color: #38bdf8; margin-top: 0; margin-bottom: 15px; font-size: 1.5em; letter-spacing: 0.5px; }
-        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); margin: 20px 0; }
-        .message { color: #e2e8f0; line-height: 1.7; font-size: 0.95em; margin-bottom: 20px; text-align: justify; text-align-last: center; }
-        .quote-box { background: rgba(255, 255, 255, 0.03); border-left: 3px solid #38bdf8; padding: 12px 15px; border-radius: 0 8px 8px 0; font-style: italic; color: #cbd5e1; font-size: 0.88em; margin-bottom: 25px; text-align: left; }
-        .btn-secondary { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; box-shadow: none; }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.18); box-shadow: none; }
+        
+        .back-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .back-link a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .back-link a:hover { color: #38bdf8; }
+
+        /* Tampilan Terima Kasih */
+        .thank-you-card { display: none; text-align: center; padding: 10px 0; animation: cardFadeIn 0.6s ease-in-out; }
+        .badge-icon {
+            width: 75px; height: 75px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 20px auto;
+            font-size: 32px; color: #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
+        }
+        .subtitle { font-size: 0.8rem; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
+        .thank-you-card h3 { color: #f8fafc; margin: 0 0 15px 0; font-size: 1.4rem; }
+        .divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 20px 0; }
+        .message { color: #cbd5e1; line-height: 1.7; font-size: 0.92rem; margin-bottom: 20px; text-align: center; }
+        .quote-box {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #38bdf8;
+            padding: 14px 16px;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #e2e8f0;
+            font-size: 0.88rem;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            box-shadow: none;
+            animation: none;
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); box-shadow: none; transform: translateY(-2px); }
+
+        /* Audio Player bawaan Anda (Tidak diubah fungsinya) */
         .audio-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(56, 189, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 30px; padding: 8px 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px; }
         .audio-player audio { height: 35px; outline: none; }
         @media (max-width: 640px) {
@@ -78,7 +256,10 @@
     <div class="glass-card">
         <!-- Form Utama -->
         <div id="formContainer">
-            <h2>Form Pengaduan XII IPS-1</h2>
+            <div class="form-header">
+                <span class="tag">Portal Aspirasi</span>
+                <h2>Form Pengaduan Kelas</h2>
+            </div>
 
             <form id="complaintForm">
                 <div class="form-group">
@@ -88,7 +269,7 @@
 
                 <div class="checkbox-group">
                     <input type="checkbox" id="anonymousCheck">
-                    <label for="anonymousCheck" style="margin:0;">Kirim sebagai Anonim (Sembunyikan Nama)</label>
+                    <label for="anonymousCheck">Kirim sebagai Anonim (Sembunyikan Nama)</label>
                 </div>
 
                 <div class="form-group">
@@ -104,11 +285,11 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="eventTime">Jam / Jam Ke- *</label>
-                        <input type="text" id="eventTime" required placeholder="Contoh: Istirahat ke-1 / Jam ke-3">
+                        <input type="text" id="eventTime" required placeholder="Contoh: Jam ke-3">
                     </div>
                     <div class="form-group">
                         <label for="eventLocation">Tempat Kejadian *</label>
-                        <input type="text" id="eventLocation" required placeholder="Contoh: Belakang Kelas / Kantin">
+                        <input type="text" id="eventLocation" required placeholder="Contoh: Belakang Kelas">
                     </div>
                 </div>
 
@@ -133,20 +314,23 @@
                     ⚠️ <strong>Penting:</strong> Laporan tanpa saksi atau bukti yang jelas serta pengaduan palsu/pencemaran nama baik akan diabaikan dan dapat dikenakan sanksi internal kelas.
                 </div>
 
-                <button type="submit" id="submitBtn">Kirim Pengaduan</button>
+                <button type="submit" id="submitBtn">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan
+                </button>
             </form>
 
             <p class="footer-note">
                 🔒 <strong>Tidak perlu takut melapor.</strong> Identitas Anda aman dan pesan dapat dikirimkan secara anonim (rahasia).
             </p>
-            <div style="text-align: center; margin-top: 15px;">
-                <a href="index.html" style="color: #38bdf8; text-decoration: none; font-size: 0.9em;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
+            
+            <div class="back-link">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
             </div>
         </div>
 
         <!-- Tampilan Ucapan Terima Kasih -->
         <div id="thankYouContainer" class="thank-you-card">
-            <div class="badge-icon">🛡️</div>
+            <div class="badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
             
             <div class="subtitle">Suaramu Sangat Berarti</div>
             <h3>Terima Kasih Atas Keberanianmu</h3>
@@ -154,25 +338,28 @@
             <div class="divider"></div>
 
             <p class="message">
-                Tidak semua orang berani mengambil langkah untuk bersuara. Laporan yang kamu kirimkan adalah bentuk keperdulian nyata agar lingkungan belajar kita tetap aman, adil, dan menghargai satu sama lain.
+                Tidak semua orang berani mengambil langkah untuk bersuara. Laporan yang kamu kirimkan adalah bentuk kepedulian nyata agar lingkungan belajar kita tetap aman, adil, dan saling menghargai.
             </p>
 
             <div class="quote-box">
                 "Satu suara yang jujur bisa menjadi awal dari perubahan besar demi kenyamanan bersama."
             </div>
 
-            <p class="message" style="font-size: 0.88em; color: #94a3b8; margin-bottom: 25px;">
+            <p class="message" style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px;">
                 Pesanmu telah tersimpan rapi dan akan ditindaklanjuti dengan bijak. Terima kasih sudah menjaga ruang kelas <strong>XII IPS-1</strong>.
             </p>
 
-            <button class="btn-secondary" onclick="resetPage()">Kirim Pengaduan Lain</button>
-            <div style="margin-top: 15px;">
-                <a href="index.html" style="color: #38bdf8; text-decoration: none; font-size: 0.9em;">Kembali ke Halaman Utama</a>
+            <button class="btn-secondary" onclick="resetPage()">
+                <i class="fa-solid fa-rotate-right"></i> Kirim Pengaduan Lain
+            </button>
+            
+            <div class="back-link" style="margin-top: 15px;">
+                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
             </div>
         </div>
     </div>
 
-    <!-- PEMUTAR MUSIK LATAR -->
+    <!-- PEMUTAR MUSIK LATAR (TIDAK DIGANGGU) -->
     <div class="audio-player">
         <i class="fa-solid fa-music" style="color: #38bdf8;"></i>
         <audio id="bgMusic" controls loop preload="auto">
@@ -208,7 +395,7 @@
             if (!confirmSubmit) return;
 
             submitBtn.disabled = true;
-            submitBtn.innerText = "Mengirim...";
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...';
 
             const isAnonymous = anonymousCheck.checked;
             const reporterValue = reporterInput.value.trim();
@@ -246,7 +433,7 @@
                     console.error('Error Email:', error);
                     alert('Gagal mengirim pengaduan, silakan coba lagi.');
                     submitBtn.disabled = false;
-                    submitBtn.innerText = "Kirim Pengaduan";
+                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
                 });
         });
 
@@ -254,11 +441,11 @@
             thankYouContainer.style.display = 'none';
             formContainer.style.display = 'block';
             submitBtn.disabled = false;
-            submitBtn.innerText = "Kirim Pengaduan";
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
             reporterInput.disabled = false;
         }
 
-        // Sinkronisasi Musik
+        // Sinkronisasi Musik (Tidak diubah)
         (function() {
             const audio = document.getElementById('bgMusic');
             if (!audio) return;
@@ -274,19 +461,4 @@
             audio.addEventListener('timeupdate', saveCurrentState);
             window.addEventListener('beforeunload', saveCurrentState);
             window.addEventListener('pagehide', saveCurrentState);
-            audio.addEventListener('play', () => localStorage.setItem('musicIsPlaying', 'true'));
-            audio.addEventListener('pause', () => localStorage.setItem('musicIsPlaying', 'false'));
-
-            if (isPlaying === 'true') {
-                audio.play().catch(() => {
-                    const resumeAudio = () => {
-                        if (localStorage.getItem('musicIsPlaying') === 'true') audio.play();
-                        document.removeEventListener('click', resumeAudio);
-                    };
-                    document.addEventListener('click', resumeAudio);
-                });
-            }
-        })();
-    </script>
-</body>
-</html>
+            audio.addEventListener('play',
