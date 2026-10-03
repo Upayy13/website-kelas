@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- TAG ANTI-CACHE AGAR BROWSER HP SELALU MEMUAT KODE TERBARU -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
     <title>Dokumentasi & Kenangan Kelas - XII IPS-1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -412,7 +418,7 @@
         <!-- KOTAK QUOTES DINAMIS -->
         <div class="quote-container">
             <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-            <p class="quote-text" id="quoteText">"Setiap detik di sekolah adalah cerita yang sedang kita tulis bersama."</p>
+            <p class="quote-text" id="quoteText">"Memuat kenangan..."</p>
             <span class="quote-author" id="quoteAuthor">— XII IPS-1</span>
         </div>
 
@@ -573,11 +579,7 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT LOGIKA QUOTES BERGANTI OTOMATIS -->
+    <!-- JAVASCRIPT ACAK KATA-KATA OTOMATIS -->
     <script>
-        // DAFTAR QUOTES KELAS
-        const quotesList = [
-            {
-                text: "Masa-masa SMA tidak akan pernah terulang kembali, jadikan setiap harinya berharga.",
-                author: "— Kebersamaan XII IPS-1"
-  
+        const quotesData = [
+         
