@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pengaduan - XII IPS-1</title>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 30px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #38bdf8;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #cbd5e1;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #38bdf8;
+        }
+
+        option {
+            background: #1e293b;
+            color: #fff;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #0284c7;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #0369a1;
+        }
+
+        .alert {
+            display: none;
+            padding: 10px;
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid #22c55e;
+            color: #4ade80;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glass-card">
+        <h2>Form Pengaduan XII IPS-1</h2>
+        
+        <div id="successAlert" class="alert">
+            Pengaduan berhasil dikirim!
+        </div>
+
+        <form id="complaintForm">
+            <div class="form-group">
+                <label for="reporter">Nama Pelapor (Opsional)</label>
+                <input type="text" id="reporter" placeholder="Masukkan nama kamu...">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="anonymousCheck">
+                <label for="anonymousCheck" style="margin:0;">Kirim sebagai Anonim (Rahasia)</label>
+            </div>
+
+            <div class="form-group">
+                <label for="reported">Siswa yang Dilaporkan *</label>
+                <input type="text" id="reported" required placeholder="Nama siswa terlaporkan">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Kategori Pengaduan *</label>
+                <select id="category" required>
+                    <option value="" disabled selected>Pilih Kategori</option>
+                    <option value="Kedisiplinan">Kedisiplinan</option>
+                    <option value="Fasilitas Kelas">Fasilitas Kelas</option>
+                    <option value="Kenyamanan / Bullying">Kenyamanan / Bullying</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Detail Kejadian / Aspirasi *</label>
+                <textarea id="description" rows="4" required placeholder="Jelaskan secara singkat dan jelas..."></textarea>
+            </div>
+
+            <button type="submit">Kirim Pengaduan</button>
+        </form>
+    </div>
+
+    <script>
+        // Inisialisasi EmailJS dengan Public Key Anda
+        emailjs.init("zA_CHW2hVj2gy4WSa");
+
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const isAnonymous = document.getElementById('anonymousCheck').checked;
+            const reporterInput = document.getElementById('reporter').value.trim();
+            const reporterName = isAnonymous || !reporterInput ? "Anonim" : reporterInput;
+            
+            const reportedName = document.getElementById('reported').value;
+            const category = document.getElementById('category').value;
+            const description = document.getElementById('description').value;
+            const alertBox = document.getElementById('successAlert');
+
+            // Parameter data yang dikirim ke EmailJS
+            const emailParams = {
+                from_name: reporterName,
+                reported_person: reportedName,
+                category: category,
+                message: description
+            };
+
+            // Kirim Email via EmailJS
+            emailjs.send('Upayy', 'template_ec614ce', emailParams)
+                .then(function(response) {
+                    console.log('Email Sent!', response.status, response.text);
+                    
+                    // Tampilkan notifikasi sukses & reset form
+                    alertBox.style.display = 'block';
+                    document.getElementById('complaintForm').reset();
+
+                    setTimeout(() => {
+                        alertBox.style.display = 'none';
+                    }, 4000);
+                }, function(error) {
+                    console.error('Error Email:', error);
+                    alert('Gagal mengirim pengaduan, silakan coba lagi.');
+                });
+        });
+    </script>
+</body>
+</html>

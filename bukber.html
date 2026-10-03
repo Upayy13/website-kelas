@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi Buka Bersama</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* 1. ANIMASI FADE-IN SAAT HALAMAN DIBUKA */
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 3.5rem 1.5rem 2.5rem;
+            position: relative;
+            animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .header-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            color: #818cf8;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #818cf8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 10px 20px;
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            color: #ffffff;
+            border-color: rgba(129, 140, 248, 0.6);
+            transform: translateX(-4px);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem 4rem;
+        }
+
+        .photo-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .photo-item {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
+        }
+
+        .photo-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(129, 140, 248, 0.4);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
+        }
+
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            max-height: 480px;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .photo-caption {
+            padding: 1.75rem;
+        }
+
+        .photo-caption h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .photo-item:hover .photo-caption h3 {
+            color: #818cf8;
+        }
+
+        .photo-caption p {
+            margin: 0;
+            line-height: 1.6;
+            color: #94a3b8;
+            font-size: 0.975rem;
+        }
+
+        /* 2. STYLING ANIMASI SCROLL REVEAL */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.97);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="header-tag">Dokumentasi Acara</span>
+        <h1>Buka Bersama Ramadhan</h1>
+        <p>Momen Kebersamaan dan Silaturahmi Anggota Kelas XII IPS-1</p>
+        <a href="index.html" class="back-btn">← Kembali ke Halaman Utama</a>
+    </header>
+
+    <div class="container">
+        <div class="photo-list">
+
+            <!-- Item Foto 1 -->
+            <div class="photo-item reveal">
+                <div class="img-wrapper">
+                    <img src="Bukber1.jpg" alt="Persiapan Bukber">
+                </div>
+                <div class="photo-caption">
+                    <h3>1. Suasana Hangat Bukber Satu Kelas</h3>
+                    <p>Potret kebersamaan seluruh anggota kelas yang duduk memanjang di meja makan lesehan tempat makan. Suasana dipenuhi rasa kekeluargaan dan kehangatan saat momen buka puasa bersama.</p>
+                </div>
+            </div>
+
+            <!-- Item Foto 2 -->
+            <div class="photo-item reveal">
+                <div class="img-wrapper">
+                    <img src="Bukber2.jpg" alt="Momen Buka Bersama">
+                </div>
+                <div class="photo-caption">
+                    <h3>2. Canda Tawa Siswi di Meja Makan</h3>
+                    <p>Momen keceriaan para siswi yang duduk mengelilingi meja makan setelah santap bersama. Mereka memamerkan berbagai pose manis dan senyuman penuh kehangatan.</p>
+                </div>
+            </div>
+
+            <!-- Item Foto 3 -->
+            <div class="photo-item reveal">
+                <div class="img-wrapper">
+                    <img src="Bukber3.jpg" alt="Foto Bersama Satu Kelas">
+                </div>
+                <div class="photo-caption">
+                    <h3>3. Pose Santai Para Siswa Laki-Laki</h3>
+                    <p>Potret empat siswa laki-laki yang tampil rapi dengan baju koko dan kemeja, berpose bersama di depan latar dekorasi yang menarik saat acara buka bersama berlangsung.</p>
+                </div>
+            </div>
+
+            <!-- Item Foto 4 -->
+            <div class="photo-item reveal">
+                <div class="img-wrapper">
+                    <img src="Bukber4.jpg" alt="Candid Kebersamaan">
+                </div>
+                <div class="photo-caption">
+                    <h3>4. Kebersamaan di Meja Makan Lesehan</h3>
+                    <p>Para siswa laki-laki berkumpul mengelilingi meja makan lesehan setelah menikmati hidangan buka puasa bersama. Mereka berpose kompak memperagakan salam dengan senyuman hangat penuh keakraban.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL -->
+    <script>
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            const windowHeight = window.innerHeight;
+            const revealPoint = 100;
+
+            reveals.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < windowHeight - revealPoint) {
+                    setTimeout(() => {
+                        element.classList.add('active');
+                    }, index * 100); 
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
+
+</body>
+</html>
