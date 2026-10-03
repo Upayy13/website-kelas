@@ -45,7 +45,7 @@
 
         header {
             text-align: center;
-            padding: 4rem 1.5rem 3rem;
+            padding: 4rem 1.5rem 2rem;
             position: relative;
             animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -89,6 +89,44 @@
             width: 100%;
         }
 
+        /* STYLING KOTAK QUOTES DINAMIS (LEBAR DISAMAKAN DENGAN GRID CONTAINER) */
+        .quote-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto 2.5rem;
+            padding: 1.5rem 2rem;
+            background: rgba(30, 41, 59, 0.35);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            text-align: center;
+            position: relative;
+            animation: pageFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .quote-icon {
+            color: #818cf8;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #818cf8;
+            letter-spacing: 0.3px;
+        }
+
         .section-header {
             display: flex;
             align-items: center;
@@ -115,7 +153,7 @@
             display: block;
         }
 
-        /* 2. EFEK DYNAMIC BLUR & SCALE SAAT HOVER HALUS */
+        /* EFEK DYNAMIC BLUR & SCALE SAAT HOVER HALUS */
         .card {
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -204,7 +242,7 @@
             transform: translateY(0) scale(1);
         }
 
-        /* 3. TATA LETAK FOOTER TERSTRUKTUR & RAPI */
+        /* TATA LETAK FOOTER TERSTRUKTUR & RAPI */
         footer {
             margin-top: auto;
             background: rgba(15, 23, 42, 0.7);
@@ -257,7 +295,6 @@
             transform: translateX(3px);
         }
 
-        /* IKON WSTYLING */
         .footer-column i {
             font-size: 1rem;
             width: 20px;
@@ -269,7 +306,6 @@
         .fa-location-dot { color: #f43f5e; }
         .fa-envelope { color: #ea4335; }
         .fa-instagram { color: #e1306c; }
-        .fa-graduation-cap { color: #a855f7; }
 
         .copyright {
             font-size: 0.8rem;
@@ -286,11 +322,18 @@
 
     <header>
         <span class="header-tag">Memori Kelas</span>
-        <h1>Arsip XII IPS-1</h1>
+        <h1>Lensa Kebersamaan XII IPS-1</h1>
         <p>Menyimpan Setiap Momen, Cerita, dan Kenangan Bersama</p>
     </header>
 
     <div class="container">
+        <!-- KOTAK QUOTES DINAMIS (DI DALAM CONTAINER AGAR LEBARNYA SEJAJAR PRESISI) -->
+        <div class="quote-container">
+            <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+            <p class="quote-text" id="quoteText">"Setiap detik di sekolah adalah cerita yang sedang kita tulis bersama."</p>
+            <span class="quote-author" id="quoteAuthor">— XII IPS-1</span>
+        </div>
+
         <div class="section-header">
             <h2 class="section-title">📸 Album & Layanan Kelas</h2>
         </div>
@@ -306,7 +349,6 @@
                     <div class="card-content">
                         <h3>Hari Batik Nasional</h3>
                         <p>Kumpulan foto dan cerita saat memakai baju batik bersama.</p>
-                        
                     </div>
                 </div>
             </a>
@@ -362,7 +404,7 @@
                 <h4><i class="fa-solid fa-school"></i> MAN 1 BANGKA</h4>
                 <p><i class="fa-solid fa-location-dot"></i> Jl. Batin Tikal, Air Ruai</p>
             </div>
-            <!-- Kolom 3: Kontak & Media Sosial -->
+            <!-- Kolom 2: Kontak & Media Sosial -->
             <div class="footer-column">
                 <h4>Kontak</h4>
                 <a href="mailto:man1bangka@gmail.com">
@@ -379,8 +421,43 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL -->
+    <!-- JAVASCRIPT UNTUK SCROLL REVEAL & QUOTES RANDOM -->
     <script>
+        const quotesList = [
+            {
+                text: "Masa-masa SMA tidak akan pernah terulang kembali, jadikan setiap harinya berharga.",
+                author: "— Kebersamaan XII IPS-1"
+            },
+            {
+                text: "Bukan tentang ke mana kita pergi, melainkan dengan siapa kita berbagi perjalanan ini.",
+                author: "— Keluarga IPS-1"
+            },
+            {
+                text: "Suatu hari nanti, kita akan merindukan ruang kelas yang bising ini.",
+                author: "— Kenangan Masa Sekolah"
+            },
+            {
+                text: "Teman sejati tidak hanya hadir saat tertawa, tapi juga bertahan di setiap perjuangan.",
+                author: "— Persahabatan IPS-1"
+            },
+            {
+                text: "Teruslah berjuang, hari ini kita belajar bersama, esok kita sukses bersama.",
+                author: "— Semangat Lulus"
+            },
+            {
+                text: "Simpan cerita ini, kelak akan menjadi alasan terbaik untuk kita tersenyum kembali.",
+                author: "— Catatan Akhir Sekolah"
+            }
+        ];
+
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotesList.length);
+            const selectedQuote = quotesList[randomIndex];
+            
+            document.getElementById('quoteText').textContent = `"${selectedQuote.text}"`;
+            document.getElementById('quoteAuthor').textContent = selectedQuote.author;
+        }
+
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             const windowHeight = window.innerHeight;
@@ -397,8 +474,12 @@
             });
         }
 
+        window.addEventListener('load', () => {
+            displayRandomQuote();
+            revealOnScroll();
+        });
+
         window.addEventListener('scroll', revealOnScroll);
-        window.addEventListener('load', revealOnScroll);
     </script>
 
 </body>
