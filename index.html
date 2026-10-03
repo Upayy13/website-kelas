@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- TAG ANTI-CACHE AGAR BROWSER HP SELALU MEMUAT KODE TERBARU -->
+    <!-- ANTI-CACHE UNTUK MEMAKSA BROWSER HP MEMUAT KODE TERBARU -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -13,8 +13,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FONT AWESOME UNTUK IKON RESMI EMAIL & INSTAGRAM -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
@@ -37,7 +35,6 @@
             background-attachment: fixed;
         }
 
-        /* ANIMASI FADE-IN SAAT HALAMAN DIBUKA */
         @keyframes pageFadeIn {
             from {
                 opacity: 0;
@@ -95,7 +92,7 @@
             width: 100%;
         }
 
-        /* STYLING KOTAK QUOTES DINAMIS */
+        /* STYLING KOTAK QUOTE (BISA DIKLIK) */
         .quote-container {
             max-width: 1100px;
             width: 100%;
@@ -108,7 +105,15 @@
             -webkit-backdrop-filter: blur(12px);
             text-align: center;
             position: relative;
+            cursor: pointer;
+            user-select: none;
+            transition: border-color 0.3s ease, background 0.3s ease;
             animation: pageFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .quote-container:hover {
+            border-color: rgba(129, 140, 248, 0.5);
+            background: rgba(30, 41, 59, 0.5);
         }
 
         .quote-icon {
@@ -124,6 +129,8 @@
             color: #e2e8f0;
             line-height: 1.6;
             margin-bottom: 0.5rem;
+            transition: opacity 0.3s ease;
+            opacity: 1;
         }
 
         .quote-author {
@@ -131,6 +138,15 @@
             font-weight: 700;
             color: #818cf8;
             letter-spacing: 0.3px;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .quote-hint {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+            display: block;
         }
 
         .section-header {
@@ -148,14 +164,12 @@
             color: #f8fafc;
         }
 
-        /* GRID ALBUM & LAYANAN */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 1.75rem;
         }
 
-        /* GRID PROFIL SISWA: KONSISTEN 2 KOLOM DI SEMUA UKURAN LAYAR */
         .students-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -168,7 +182,6 @@
             display: block;
         }
 
-        /* EFEK DYNAMIC BLUR & SCALE SAAT HOVER */
         .card, .student-card {
             background: rgba(30, 41, 59, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -196,7 +209,6 @@
             height: 200px;
         }
 
-        /* UKURAN FOTO SISWA DENGAN RASIO 1:1 (PERSEGI) */
         .student-img-wrapper {
             position: relative;
             overflow: hidden;
@@ -251,7 +263,6 @@
             gap: 6px;
         }
 
-        /* STYLING DETAIL SISWA */
         .student-info {
             font-size: 0.8rem;
             color: #cbd5e1;
@@ -277,7 +288,6 @@
             flex-grow: 1;
         }
 
-        /* STYLING WIDGET MUSIK MELAYANG */
         .audio-player {
             position: fixed;
             bottom: 20px;
@@ -300,7 +310,6 @@
             outline: none;
         }
 
-        /* KHUSUS PERANGKAT HP / MOBILE */
         @media (max-width: 640px) {
             .students-grid {
                 gap: 0.75rem;
@@ -322,15 +331,11 @@
             }
         }
 
-        /* KELAS REVEAL TAMPIL SECARA LANGSUNG */
         .reveal {
             opacity: 1;
             transform: translateY(0);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* FOOTER */
         footer {
             margin-top: auto;
             background: rgba(15, 23, 42, 0.7);
@@ -415,11 +420,12 @@
     </header>
 
     <div class="container">
-        <!-- KOTAK QUOTES DINAMIS -->
-        <div class="quote-container">
+        <!-- KOTAK QUOTES DINAMIS (DAPAT DIKLIK & OTOMATIS BERGANTI TIAP 10 DETIK) -->
+        <div class="quote-container" id="quoteBox">
             <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
-            <p class="quote-text" id="quoteText">"Memuat kenangan..."</p>
+            <p class="quote-text" id="quoteText">"Memuat kata-kata..."</p>
             <span class="quote-author" id="quoteAuthor">— XII IPS-1</span>
+            <span class="quote-hint">(Ketuk untuk ganti kata-kata)</span>
         </div>
 
         <!-- 1. BAGIAN PROFIL ANGGOTA KELAS -->
@@ -490,7 +496,6 @@
 
         <div class="gallery-grid">
             
-            <!-- Album 1: Hari Batik -->
             <a href="hari-batik.html" class="card-link reveal">
                 <div class="card">
                     <div class="img-wrapper">
@@ -503,7 +508,6 @@
                 </div>
             </a>
 
-            <!-- Album 2: Classmeeting -->
             <a href="classmeeting.html" class="card-link reveal">
                 <div class="card">
                     <div class="img-wrapper">
@@ -516,7 +520,6 @@
                 </div>
             </a>
 
-            <!-- Album 3: Buka Bersama -->
             <a href="bukber.html" class="card-link reveal">
                 <div class="card">
                     <div class="img-wrapper">
@@ -529,7 +532,6 @@
                 </div>
             </a>
 
-            <!-- Layanan Pengaduan -->
             <a href="pengaduan.html" class="card-link reveal">
                 <div class="card">
                     <div class="img-wrapper">
@@ -579,7 +581,103 @@
         </div>
     </footer>
 
-    <!-- JAVASCRIPT ACAK KATA-KATA OTOMATIS -->
+    <!-- SKRIP ROTASI QUOTES (10 DETIK & INSTANT RELOAD) -->
     <script>
-        const quotesData = [
-         
+        (function() {
+            const listQuotes = [
+                {
+                    text: "Masa sekolah memang akan berakhir, tetapi ikatan dan kenangan di dalamnya akan bertahan selamanya.",
+                    author: "— Kebersamaan XII IPS-1"
+                },
+                {
+                    text: "Kisah terbaik tidak ditulis di dalam buku pelajaran, melainkan di setiap tawa yang kita bagi di kelas ini.",
+                    author: "— Jejak XII IPS-1"
+                },
+                {
+                    text: "Jangan takut melangkah ke depan. Masa depan milik mereka yang berani bermimpi dan saling mendukung.",
+                    author: "— Motivasi XII IPS-1"
+                },
+                {
+                    text: "Suatu hari nanti, ruang kelas ini hanya akan berisi ingatan, tapi semangat kita akan terus menyala.",
+                    author: "— Kenangan XII IPS-1"
+                },
+                {
+                    text: "Kita melangkah dari sudut yang berbeda, berjuang di kelas yang sama, dan menuju masa depan yang gemilang.",
+                    author: "— Perjuangan XII IPS-1"
+                },
+                {
+                    text: "Bukan tentang seberapa cepat kita sampai di puncak, melainkan tentang siapa yang bertahan berjuang bersama.",
+                    author: "— Semangat XII IPS-1"
+                },
+                {
+                    text: "Setiap hari di sekolah adalah satu baris kalimat dalam buku kenangan indah yang takkan pernah pudar.",
+                    author: "— Catatan XII IPS-1"
+                },
+                {
+                    text: "Nikmati setiap detik kebersamaan, karena hal sederhana hari ini adalah hal yang paling dirindukan besok.",
+                    author: "— Momen XII IPS-1"
+                },
+                {
+                    text: "Pendidikan memberi kita pengetahuan, tetapi kebersamaan di kelas ini memberi kita arti kekeluargaan.",
+                    author: "— Keluarga XII IPS-1"
+                },
+                {
+                    text: "Jadikan setiap rintangan sebagai batu pijakan, dan jadikan teman sekelas sebagai pendorong keberhasilan.",
+                    author: "— Impian XII IPS-1"
+                }
+            ];
+
+            let activeIdx = -1;
+            let timerId = null;
+
+            function renderQuote() {
+                const elText = document.getElementById('quoteText');
+                const elAuthor = document.getElementById('quoteAuthor');
+                
+                if (!elText || !elAuthor) return;
+
+                let newIdx;
+                do {
+                    newIdx = Math.floor(Math.random() * listQuotes.length);
+                } while (newIdx === activeIdx && listQuotes.length > 1);
+
+                activeIdx = newIdx;
+
+                elText.style.opacity = '0';
+                elAuthor.style.opacity = '0';
+
+                setTimeout(() => {
+                    elText.textContent = `"${listQuotes[newIdx].text}"`;
+                    elAuthor.textContent = listQuotes[newIdx].author;
+                    elText.style.opacity = '1';
+                    elAuthor.style.opacity = '1';
+                }, 300);
+            }
+
+            function startTimer() {
+                if (timerId) clearInterval(timerId);
+                // Timer berganti otomatis setiap 10 detik (10000ms)
+                timerId = setInterval(renderQuote, 10000);
+            }
+
+            renderQuote();
+            startTimer();
+
+            const quoteBox = document.getElementById('quoteBox');
+            if (quoteBox) {
+                quoteBox.addEventListener('click', () => {
+                    renderQuote();
+                    startTimer();
+                });
+            }
+
+            document.addEventListener('visibilitychange', () => {
+                if (!document.hidden) {
+                    renderQuote();
+                    startTimer();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
