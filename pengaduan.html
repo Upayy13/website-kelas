@@ -56,6 +56,15 @@
             margin-bottom: 15px;
         }
 
+        .form-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
         label {
             display: block;
             margin-bottom: 5px;
@@ -105,6 +114,18 @@
             cursor: pointer;
         }
 
+        /* Kotak Peringatan */
+        .warning-box {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 3px solid #ef4444;
+            padding: 10px 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.82em;
+            color: #fca5a5;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
         button {
             width: 100%;
             padding: 12px;
@@ -143,7 +164,7 @@
             color: #38bdf8;
         }
 
-        /* Tampilan Kartu Ucapan Terima Kasih Menyentuh */
+        /* Tampilan Kartu Ucapan Terima Kasih */
         .thank-you-card {
             display: none;
             text-align: center;
@@ -250,6 +271,24 @@
                     <input type="text" id="reported" required placeholder="Nama siswa terlaporkan">
                 </div>
 
+                <!-- Input Saksi Mata (Wajib) -->
+                <div class="form-group">
+                    <label for="witness">Saksi Mata (Minimal 1 Siswa) *</label>
+                    <input type="text" id="witness" required placeholder="Nama siswa yang melihat/mengetahui kejadian">
+                </div>
+
+                <!-- Detail Jam & Tempat Kejadian (Wajib) -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="eventTime">Jam / Jam Ke- *</label>
+                        <input type="text" id="eventTime" required placeholder="Contoh: Istirahat ke-1 / Jam ke-3">
+                    </div>
+                    <div class="form-group">
+                        <label for="eventLocation">Tempat Kejadian *</label>
+                        <input type="text" id="eventLocation" required placeholder="Contoh: Belakang Kelas / Kantin">
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label for="category">Kategori Pengaduan *</label>
                     <select id="category" required>
@@ -264,7 +303,12 @@
 
                 <div class="form-group">
                     <label for="description">Detail Kejadian / Aspirasi *</label>
-                    <textarea id="description" rows="5" required placeholder="Jelaskan secara jelas tanpa batasan panjang tulisan..."></textarea>
+                    <textarea id="description" rows="4" required placeholder="Jelaskan kronologi secara jelas..."></textarea>
+                </div>
+
+                <!-- Peringatan Ketentuan Laporan -->
+                <div class="warning-box">
+                    ⚠️ <strong>Penting:</strong> Laporan tanpa saksi atau bukti yang jelas serta pengaduan palsu/pencemaran nama baik akan diabaikan dan dapat dikenakan sanksi internal kelas.
                 </div>
 
                 <button type="submit" id="submitBtn">Kirim Pengaduan</button>
@@ -275,7 +319,7 @@
             </p>
         </div>
 
-        <!-- Tampilan Ucapan Terima Kasih & Apresiasi Menyentuh -->
+        <!-- Tampilan Ucapan Terima Kasih -->
         <div id="thankYouContainer" class="thank-you-card">
             <div class="badge-icon">🛡️</div>
             
@@ -325,7 +369,7 @@
         document.getElementById('complaintForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const confirmSubmit = confirm("Apakah Anda yakin ingin mengirim pengaduan ini?");
+            const confirmSubmit = confirm("Apakah Anda yakin data pengaduan dan saksi mata sudah benar?");
             if (!confirmSubmit) return;
 
             submitBtn.disabled = true;
@@ -336,17 +380,26 @@
             const reporterName = isAnonymous || !reporterValue ? "Anonim (Rahasia)" : reporterValue;
             
             const reportedName = document.getElementById('reported').value;
+            const witnessName = document.getElementById('witness').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const eventLocation = document.getElementById('eventLocation').value;
             const category = document.getElementById('category').value;
             const description = document.getElementById('description').value;
 
             const now = new Date();
             const timeSent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
+            // Gabungkan detail kejadian lengkap ke dalam parameter email
+            const fullMessage = `Waktu Kejadian: ${eventTime}\nLokasi Kejadian: ${eventLocation}\nSaksi Mata: ${witnessName}\n\nDetail Laporan:\n${description}`;
+
             const emailParams = {
                 from_name: reporterName,
                 reported_person: reportedName,
+                witness_person: witnessName,
+                event_time: eventTime,
+                event_location: eventLocation,
                 category: category,
-                message: description,
+                message: fullMessage,
                 timestamp: timeSent
             };
 
@@ -354,7 +407,6 @@
                 .then(function(response) {
                     console.log('Email Sent!', response.status, response.text);
                     
-                    // Transisi ke Tampilan Ucapan Apresiasi
                     formContainer.style.display = 'none';
                     thankYouContainer.style.display = 'block';
                     document.getElementById('complaintForm').reset();
