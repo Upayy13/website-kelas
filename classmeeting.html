@@ -7,16 +7,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- FONT AWESOME UNTUK IKON MUSIK -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #0b0f19;
@@ -27,195 +21,34 @@
                 radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
             background-attachment: fixed;
         }
-
-        /* 1. ANIMASI FADE-IN SAAT HALAMAN DIBUKA */
         @keyframes pageFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        header {
-            text-align: center;
-            padding: 3.5rem 1.5rem 2.5rem;
-            position: relative;
-            animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .header-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            color: #818cf8;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            letter-spacing: 0.5px;
-        }
-
-        header h1 {
-            font-size: 2.3rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.5px;
-        }
-
-        header p {
-            color: #94a3b8;
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #818cf8;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            padding: 10px 20px;
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid rgba(129, 140, 248, 0.3);
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background: rgba(99, 102, 241, 0.2);
-            color: #ffffff;
-            border-color: rgba(129, 140, 248, 0.6);
-            transform: translateX(-4px);
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 1.5rem 4rem;
-        }
-
-        .photo-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
-
-        .photo-item {
-            background: rgba(30, 41, 59, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
-                        border-color 0.4s ease, 
-                        box-shadow 0.4s ease;
-        }
-
-        .photo-item:hover {
-            transform: translateY(-6px);
-            border-color: rgba(129, 140, 248, 0.4);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.2);
-        }
-
-        .img-wrapper {
-            position: relative;
-            overflow: hidden;
-            max-height: 480px;
-        }
-
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .photo-item:hover img {
-            transform: scale(1.03);
-        }
-
-        .photo-caption {
-            padding: 1.75rem;
-        }
-
-        .photo-caption h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #f1f5f9;
-            margin-bottom: 0.75rem;
-            transition: color 0.3s ease;
-        }
-
-        .photo-item:hover .photo-caption h3 {
-            color: #818cf8;
-        }
-
-        .photo-caption p {
-            margin: 0;
-            line-height: 1.6;
-            color: #94a3b8;
-            font-size: 0.975rem;
-        }
-
-        /* STYLING WIDGET MUSIK MELAYANG */
-        .audio-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(30, 41, 59, 0.85);
-            border: 1px solid rgba(129, 140, 248, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 30px;
-            padding: 8px 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .audio-player audio {
-            height: 35px;
-            outline: none;
-        }
-
+        header { text-align: center; padding: 3.5rem 1.5rem 2.5rem; position: relative; animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .header-tag { display: inline-block; padding: 6px 16px; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(129, 140, 248, 0.3); color: #818cf8; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.5px; }
+        header h1 { font-size: 2.3rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; letter-spacing: -0.5px; }
+        header p { color: #94a3b8; font-size: 1rem; margin-bottom: 1.5rem; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; color: #818cf8; text-decoration: none; font-weight: 600; font-size: 0.9rem; padding: 10px 20px; background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 30px; backdrop-filter: blur(10px); transition: all 0.3s ease; }
+        .back-btn:hover { background: rgba(99, 102, 241, 0.2); color: #ffffff; border-color: rgba(129, 140, 248, 0.6); transform: translateX(-4px); }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+        .photo-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 1rem; }
+        .photo-item { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; overflow: hidden; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease; }
+        .photo-item:hover { transform: translateY(-6px); border-color: rgba(129, 140, 248, 0.4); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.2); }
+        .img-wrapper { position: relative; overflow: hidden; max-height: 480px; }
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+        .photo-item:hover img { transform: scale(1.03); }
+        .photo-caption { padding: 1.75rem; }
+        .photo-caption h3 { font-size: 1.25rem; font-weight: 700; color: #f1f5f9; margin-bottom: 0.75rem; transition: color 0.3s ease; }
+        .photo-item:hover .photo-caption h3 { color: #818cf8; }
+        .photo-caption p { margin: 0; line-height: 1.6; color: #94a3b8; font-size: 0.975rem; }
+        .audio-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(129, 140, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 30px; padding: 8px 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px; }
+        .audio-player audio { height: 35px; outline: none; }
         @media (max-width: 640px) {
-            .audio-player {
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                justify-content: center;
-            }
+            .audio-player { bottom: 10px; right: 10px; left: 10px; justify-content: center; }
         }
-
-        /* 2. STYLING ANIMASI SCROLL REVEAL */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px) scale(0.97);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
+        .reveal { opacity: 0; transform: translateY(40px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
     </style>
 </head>
 <body>
@@ -229,62 +62,45 @@
 
     <div class="container">
         <div class="photo-list">
-
-            <!-- Item Foto 1 -->
             <div class="photo-item reveal">
-                <div class="img-wrapper">
-                    <img src="Classmeeting1.jpg" alt="Pertandingan Futsal">
-                </div>
+                <div class="img-wrapper"><img src="Classmeeting1.jpg" alt="Pertandingan Futsal"></div>
                 <div class="photo-caption">
                     <h3>1. Juara 2 Voli & Juara 3 Futsal</h3>
                     <p>Foto bersama seluruh perwakilan kelas saat menerima penghargaan dan piala/sertifikat dalam ajang perlombaan. Rasa bangga dan bahagia memancar dari wajah para siswa dan siswi yang berhasil meraih Juara 2 Lomba Voli Campuran dan Juara 3 Lomba Futsal. Buah dari kerja keras, semangat pantang menyerah, dan dukungan penuh dari seluruh teman-teman kelas!</p>
                 </div>
             </div>
 
-            <!-- Item Foto 2 -->
             <div class="photo-item reveal">
-                <div class="img-wrapper">
-                    <img src="Classmeeting2.jpg" alt="Lomba Tarik Tambang">
-                </div>
+                <div class="img-wrapper"><img src="Classmeeting2.jpg" alt="Lomba Tarik Tambang"></div>
                 <div class="photo-caption">
                     <h3>2. Skuad Utama Tim Futsal Kelas XII IPS-1 - Jersey Gen 1</h3>
                     <p>Potret kekompakan tim futsal kelas XII IPS-1 saat mengenakan jersey kebanggaan Generasi 1 berwarna kuning beraksen hitam. Para pemain berpose percaya diri dan siap bertanding membela nama kelas di lapangan, memancarkan semangat juang, kebersamaan, dan kesiapan untuk meraih kemenangan.</p>
                 </div>
             </div>
 
-            <!-- Item Foto 3 -->
             <div class="photo-item reveal">
-                <div class="img-wrapper">
-                    <img src="Classmeeting3.jpg" alt="Supporter Kelas">
-                </div>
+                <div class="img-wrapper"><img src="Classmeeting3.jpg" alt="Supporter Kelas"></div>
                 <div class="photo-caption">
                     <h3>3. Puncak Kejayaan: Meraih Juara 1 Futsal 2025</h3>
                     <p>Momen penuh kebanggaan saat tim futsal kelas memamerkan hadiah dan medali kemenangan atas keberhasilan meraih Juara 1 Lomba Futsal tahun 2025. Mengenakan seragam sekolah hijau yang serasi, para pemain berpose ceria dan bahagia merayakan hasil kerja keras serta kebersamaan mereka di lapangan.</p>
                 </div>
             </div>
 
-            <!-- Item Foto 4 -->
             <div class="photo-item reveal">
-                <div class="img-wrapper">
-                    <img src="Classmeeting4.jpg" alt="Lomba E-Sport">
-                </div>
+                <div class="img-wrapper"><img src="Classmeeting4.jpg" alt="Lomba E-Sport"></div>
                 <div class="photo-caption">
                     <h3>4. Tampilan Baru Skuad Futsal - Jersey Gen 2</h3>
                     <p>Kekompakan para pemain tim futsal kelas XII IPS-1 saat mengenakan jersey Generasi 2 berwarna hijau-putih yang keren dan elegan. Berfoto bersama di dalam kelas dengan berbagai pose ekspresif dan ceria, memancarkan semangat baru serta kesiapan untuk berlaga di setiap pertandingan.</p>
                 </div>
             </div>
 
-            <!-- Item Foto 5 -->
             <div class="photo-item reveal">
-                <div class="img-wrapper">
-                    <img src="Classmeeting5.jpg" alt="Penyerahan Piala">
-                </div>
+                <div class="img-wrapper"><img src="Classmeeting5.jpg" alt="Penyerahan Piala"></div>
                 <div class="photo-caption">
                     <h3>5. Sinergi Tanpa Batas: Pemain Futsal dan Supporter Kelas</h3>
                     <p>Potret kebersamaan para pemain futsal kelas yang mengenakan jersey hijau saat berfoto bersama para siswi pendukung (supporter). Kehadiran para supporter di belakang pemain memberikan energi dan semangat luar biasa, menciptakan Momen kekeluargaan yang erat, hangat, dan penuh kekompakan antara pemain di lapangan dan pendukung dari luar lapangan.</p>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -297,38 +113,27 @@
         </audio>
     </div>
 
-    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL & SINKRONISASI MUSIK -->
     <script>
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             const windowHeight = window.innerHeight;
-            const revealPoint = 100;
-
             reveals.forEach((element, index) => {
                 const elementTop = element.getBoundingClientRect().top;
-                
-                if (elementTop < windowHeight - revealPoint) {
-                    setTimeout(() => {
-                        element.classList.add('active');
-                    }, index * 100); 
+                if (elementTop < windowHeight - 100) {
+                    setTimeout(() => { element.classList.add('active'); }, index * 100); 
                 }
             });
         }
-
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
 
-        /* SKRIP PENYELARASAN DETIK & STATUS MUSIK YANG DISEMPURNAKAN */
+        // Sinkronisasi Musik
         (function() {
             const audio = document.getElementById('bgMusic');
             if (!audio) return;
-
             const savedTime = localStorage.getItem('musicCurrentTime');
             const isPlaying = localStorage.getItem('musicIsPlaying');
-
-            if (savedTime !== null) {
-                audio.currentTime = parseFloat(savedTime);
-            }
+            if (savedTime !== null) audio.currentTime = parseFloat(savedTime);
 
             const saveCurrentState = () => {
                 localStorage.setItem('musicCurrentTime', audio.currentTime);
@@ -338,21 +143,13 @@
             audio.addEventListener('timeupdate', saveCurrentState);
             window.addEventListener('beforeunload', saveCurrentState);
             window.addEventListener('pagehide', saveCurrentState);
-
-            audio.addEventListener('play', () => {
-                localStorage.setItem('musicIsPlaying', 'true');
-            });
-
-            audio.addEventListener('pause', () => {
-                localStorage.setItem('musicIsPlaying', 'false');
-            });
+            audio.addEventListener('play', () => localStorage.setItem('musicIsPlaying', 'true'));
+            audio.addEventListener('pause', () => localStorage.setItem('musicIsPlaying', 'false'));
 
             if (isPlaying === 'true') {
                 audio.play().catch(() => {
                     const resumeAudio = () => {
-                        if (localStorage.getItem('musicIsPlaying') === 'true') {
-                            audio.play();
-                        }
+                        if (localStorage.getItem('musicIsPlaying') === 'true') audio.play();
                         document.removeEventListener('click', resumeAudio);
                     };
                     document.addEventListener('click', resumeAudio);
@@ -360,6 +157,5 @@
             }
         })();
     </script>
-
 </body>
 </html>

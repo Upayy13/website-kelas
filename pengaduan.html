@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Pengaduan - XII IPS-1</title>
-    <!-- FONT AWESOME UNTUK IKON MUSIK -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- EmailJS SDK -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
         body {
@@ -20,7 +18,6 @@
             margin: 0;
             padding: 20px 20px 80px 20px;
         }
-
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(12px);
@@ -34,251 +31,45 @@
             position: relative;
             overflow: hidden;
         }
-
-        /* Ambient Light Effect */
         .glass-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 60%);
             pointer-events: none;
         }
-
-        h2 {
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 20px;
-            color: #38bdf8;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 10px;
-        }
-
-        .form-row .form-group {
-            flex: 1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 0.9em;
-            color: #cbd5e1;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            color: #fff;
-            box-sizing: border-box;
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: #38bdf8;
-        }
-
-        input:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        option {
-            background: #1e293b;
-            color: #fff;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .checkbox-group input {
-            width: auto;
-            cursor: pointer;
-        }
-
-        .checkbox-group label {
-            cursor: pointer;
-        }
-
-        /* Kotak Peringatan */
-        .warning-box {
-            background: rgba(239, 68, 68, 0.1);
-            border-left: 3px solid #ef4444;
-            padding: 10px 12px;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.82em;
-            color: #fca5a5;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #0284c7, #0369a1);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
-            background: linear-gradient(135deg, #0369a1, #075985);
-        }
-
-        button:disabled {
-            background: #64748b;
-            cursor: wait;
-            transform: none;
-            box-shadow: none;
-        }
-
-        .footer-note {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.85em;
-            color: #94a3b8;
-            line-height: 1.5;
-        }
-
-        .footer-note strong {
-            color: #38bdf8;
-        }
-
-        /* Tampilan Kartu Ucapan Terima Kasih */
-        .thank-you-card {
-            display: none;
-            text-align: center;
-            padding: 10px 0;
-            animation: fadeIn 0.6s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .badge-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(56, 189, 248, 0.15);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 20px auto;
-            font-size: 32px;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-        }
-
-        .subtitle {
-            font-size: 0.85em;
-            color: #94a3b8;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-
-        .thank-you-card h3 {
-            color: #38bdf8;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 1.5em;
-            letter-spacing: 0.5px;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            margin: 20px 0;
-        }
-
-        .message {
-            color: #e2e8f0;
-            line-height: 1.7;
-            font-size: 0.95em;
-            margin-bottom: 20px;
-            text-align: justify;
-            text-align-last: center;
-        }
-
-        .quote-box {
-            background: rgba(255, 255, 255, 0.03);
-            border-left: 3px solid #38bdf8;
-            padding: 12px 15px;
-            border-radius: 0 8px 8px 0;
-            font-style: italic;
-            color: #cbd5e1;
-            font-size: 0.88em;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #fff;
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.18);
-            box-shadow: none;
-        }
-
-        /* STYLING WIDGET MUSIK MELAYANG */
-        .audio-player {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            background: rgba(30, 41, 59, 0.85);
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 30px;
-            padding: 8px 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .audio-player audio {
-            height: 35px;
-            outline: none;
-        }
-
+        h2 { text-align: center; margin-top: 0; margin-bottom: 20px; color: #38bdf8; }
+        .form-group { margin-bottom: 15px; }
+        .form-row { display: flex; gap: 10px; }
+        .form-row .form-group { flex: 1; }
+        label { display: block; margin-bottom: 5px; font-size: 0.9em; color: #cbd5e1; }
+        input, select, textarea { width: 100%; padding: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; color: #fff; box-sizing: border-box; outline: none; transition: border-color 0.3s; }
+        input:focus, select:focus, textarea:focus { border-color: #38bdf8; }
+        input:disabled { opacity: 0.5; cursor: not-allowed; }
+        option { background: #1e293b; color: #fff; }
+        .checkbox-group { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
+        .checkbox-group input { width: auto; cursor: pointer; }
+        .checkbox-group label { cursor: pointer; }
+        .warning-box { background: rgba(239, 68, 68, 0.1); border-left: 3px solid #ef4444; padding: 10px 12px; border-radius: 0 8px 8px 0; font-size: 0.82em; color: #fca5a5; margin-bottom: 15px; line-height: 1.4; }
+        button { width: 100%; padding: 12px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3); }
+        button:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5); background: linear-gradient(135deg, #0369a1, #075985); }
+        button:disabled { background: #64748b; cursor: wait; transform: none; box-shadow: none; }
+        .footer-note { margin-top: 20px; text-align: center; font-size: 0.85em; color: #94a3b8; line-height: 1.5; }
+        .footer-note strong { color: #38bdf8; }
+        .thank-you-card { display: none; text-align: center; padding: 10px 0; animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .badge-icon { width: 70px; height: 70px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 20px auto; font-size: 32px; box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); }
+        .subtitle { font-size: 0.85em; color: #94a3b8; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+        .thank-you-card h3 { color: #38bdf8; margin-top: 0; margin-bottom: 15px; font-size: 1.5em; letter-spacing: 0.5px; }
+        .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); margin: 20px 0; }
+        .message { color: #e2e8f0; line-height: 1.7; font-size: 0.95em; margin-bottom: 20px; text-align: justify; text-align-last: center; }
+        .quote-box { background: rgba(255, 255, 255, 0.03); border-left: 3px solid #38bdf8; padding: 12px 15px; border-radius: 0 8px 8px 0; font-style: italic; color: #cbd5e1; font-size: 0.88em; margin-bottom: 25px; text-align: left; }
+        .btn-secondary { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; box-shadow: none; }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.18); box-shadow: none; }
+        .audio-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(56, 189, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 30px; padding: 8px 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px; }
+        .audio-player audio { height: 35px; outline: none; }
         @media (max-width: 640px) {
-            .audio-player {
-                bottom: 10px;
-                right: 10px;
-                left: 10px;
-                justify-content: center;
-            }
+            .audio-player { bottom: 10px; right: 10px; left: 10px; justify-content: center; }
         }
     </style>
 </head>
@@ -305,13 +96,11 @@
                     <input type="text" id="reported" required placeholder="Nama siswa terlaporkan">
                 </div>
 
-                <!-- Input Saksi Mata (Wajib) -->
                 <div class="form-group">
                     <label for="witness">Saksi Mata (Minimal 1 Siswa) *</label>
                     <input type="text" id="witness" required placeholder="Nama siswa yang melihat/mengetahui kejadian">
                 </div>
 
-                <!-- Detail Jam & Tempat Kejadian (Wajib) -->
                 <div class="form-row">
                     <div class="form-group">
                         <label for="eventTime">Jam / Jam Ke- *</label>
@@ -340,7 +129,6 @@
                     <textarea id="description" rows="4" required placeholder="Jelaskan kronologi secara jelas..."></textarea>
                 </div>
 
-                <!-- Peringatan Ketentuan Laporan -->
                 <div class="warning-box">
                     ⚠️ <strong>Penting:</strong> Laporan tanpa saksi atau bukti yang jelas serta pengaduan palsu/pencemaran nama baik akan diabaikan dan dapat dikenakan sanksi internal kelas.
                 </div>
@@ -351,6 +139,9 @@
             <p class="footer-note">
                 🔒 <strong>Tidak perlu takut melapor.</strong> Identitas Anda aman dan pesan dapat dikirimkan secara anonim (rahasia).
             </p>
+            <div style="text-align: center; margin-top: 15px;">
+                <a href="index.html" style="color: #38bdf8; text-decoration: none; font-size: 0.9em;"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
+            </div>
         </div>
 
         <!-- Tampilan Ucapan Terima Kasih -->
@@ -375,6 +166,9 @@
             </p>
 
             <button class="btn-secondary" onclick="resetPage()">Kirim Pengaduan Lain</button>
+            <div style="margin-top: 15px;">
+                <a href="index.html" style="color: #38bdf8; text-decoration: none; font-size: 0.9em;">Kembali ke Halaman Utama</a>
+            </div>
         </div>
     </div>
 
@@ -396,7 +190,6 @@
         const formContainer = document.getElementById('formContainer');
         const thankYouContainer = document.getElementById('thankYouContainer');
 
-        // Fitur Anonim
         anonymousCheck.addEventListener('change', function() {
             if (this.checked) {
                 reporterInput.value = '';
@@ -408,7 +201,6 @@
             }
         });
 
-        // Submit Form
         document.getElementById('complaintForm').addEventListener('submit', function(e) {
             e.preventDefault();
 
@@ -432,7 +224,6 @@
             const now = new Date();
             const timeSent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
 
-            // Gabungkan detail kejadian lengkap ke dalam parameter email
             const fullMessage = `Waktu Kejadian: ${eventTime}\nLokasi Kejadian: ${eventLocation}\nSaksi Mata: ${witnessName}\n\nDetail Laporan:\n${description}`;
 
             const emailParams = {
@@ -448,8 +239,6 @@
 
             emailjs.send('Upayy', 'template_ec614ce', emailParams)
                 .then(function(response) {
-                    console.log('Email Sent!', response.status, response.text);
-                    
                     formContainer.style.display = 'none';
                     thankYouContainer.style.display = 'block';
                     document.getElementById('complaintForm').reset();
@@ -461,7 +250,6 @@
                 });
         });
 
-        // Kembali ke form awal
         function resetPage() {
             thankYouContainer.style.display = 'none';
             formContainer.style.display = 'block';
@@ -470,17 +258,13 @@
             reporterInput.disabled = false;
         }
 
-        /* SKRIP PENYELARASAN DETIK & STATUS MUSIK YANG DISEMPURNAKAN */
+        // Sinkronisasi Musik
         (function() {
             const audio = document.getElementById('bgMusic');
             if (!audio) return;
-
             const savedTime = localStorage.getItem('musicCurrentTime');
             const isPlaying = localStorage.getItem('musicIsPlaying');
-
-            if (savedTime !== null) {
-                audio.currentTime = parseFloat(savedTime);
-            }
+            if (savedTime !== null) audio.currentTime = parseFloat(savedTime);
 
             const saveCurrentState = () => {
                 localStorage.setItem('musicCurrentTime', audio.currentTime);
@@ -490,21 +274,13 @@
             audio.addEventListener('timeupdate', saveCurrentState);
             window.addEventListener('beforeunload', saveCurrentState);
             window.addEventListener('pagehide', saveCurrentState);
-
-            audio.addEventListener('play', () => {
-                localStorage.setItem('musicIsPlaying', 'true');
-            });
-
-            audio.addEventListener('pause', () => {
-                localStorage.setItem('musicIsPlaying', 'false');
-            });
+            audio.addEventListener('play', () => localStorage.setItem('musicIsPlaying', 'true'));
+            audio.addEventListener('pause', () => localStorage.setItem('musicIsPlaying', 'false'));
 
             if (isPlaying === 'true') {
                 audio.play().catch(() => {
                     const resumeAudio = () => {
-                        if (localStorage.getItem('musicIsPlaying') === 'true') {
-                            audio.play();
-                        }
+                        if (localStorage.getItem('musicIsPlaying') === 'true') audio.play();
                         document.removeEventListener('click', resumeAudio);
                     };
                     document.addEventListener('click', resumeAudio);
