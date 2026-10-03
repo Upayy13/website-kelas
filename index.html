@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi & Kenangan Kelas</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0; padding: 0;
+            background-color: #0f172a; color: #f8fafc;
+        }
+        header {
+            text-align: center; padding: 3rem 1rem;
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border-bottom: 2px solid #38bdf8;
+        }
+        header h1 { margin: 0; color: #38bdf8; }
+        header p { color: #94a3b8; }
+        .container { max-width: 1000px; margin: 20px auto; padding: 0 15px; }
+        .section-title { border-left: 4px solid #38bdf8; padding-left: 10px; margin-top: 30px; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px; margin-top: 15px;
+        }
+        .card-link { text-decoration: none; color: inherit; display: block; }
+        .card {
+            background-color: #1e293b; border-radius: 10px;
+            overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .card:hover { transform: translateY(-5px); }
+        .card img { width: 100%; height: 180px; object-fit: cover; }
+        .card-content { padding: 15px; }
+        .card-content h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #38bdf8; }
+        .card-content p { margin: 0; font-size: 0.9rem; color: #cbd5e1; }
+        .date { font-size: 0.8rem; color: #64748b; margin-top: 8px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Arsip & Dokumentasi XI IPA 1</h1>
+        <p>Menyimpan Setiap Momen, Cerita, dan Kenangan Bersama</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">📸 Album Dokumentasi</h2>
+        <div class="gallery-grid">
+            
+            <!-- Kartu Album Hari Batik (Mengarahkan ke hari-batik.html) -->
+            <a href="hari-batik.html" class="card-link">
+                <div class="card">
+                    <!-- Menggunakan foto pertama sebagai sampul album -->
+                    <img src="Batik1.jpg" alt="Hari Batik">
+                    <div class="card-content">
+                        <h3>Hari Batik Nasional</h3>
+                        <p>Kumpulan foto dan cerita saat memakai baju batik bersama.</p>
+                        <div class="date">📅 2 Oktober 2026</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</body>
+</html>
