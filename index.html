@@ -92,7 +92,6 @@
             width: 100%;
         }
 
-        /* STYLING KOTAK QUOTE (BISA DIKLIK) */
         .quote-container {
             max-width: 1100px;
             width: 100%;
@@ -488,8 +487,7 @@
             </div>
 
         </div>
-
-        <!-- 2. BAGIAN ALBUM & LAYANAN KELAS -->
+                <!-- 2. BAGIAN ALBUM & LAYANAN KELAS -->
         <div class="section-header">
             <h2 class="section-title">📸 Album & Layanan Kelas</h2>
         </div>
@@ -587,7 +585,6 @@
             const audio = document.getElementById('bgMusic');
             if (!audio) return;
 
-            // 1. Ambil posisi waktu terakhir dan status play dari memori browser saat halaman dimuat
             const savedTime = localStorage.getItem('musicCurrentTime');
             const isPlaying = localStorage.getItem('musicIsPlaying');
 
@@ -595,7 +592,6 @@
                 audio.currentTime = parseFloat(savedTime);
             }
 
-            // 2. Simpan posisi waktu secara berkala dan pastikan tersimpan instan saat halaman akan ditutup/pindah
             const saveCurrentState = () => {
                 localStorage.setItem('musicCurrentTime', audio.currentTime);
                 localStorage.setItem('musicIsPlaying', !audio.paused ? 'true' : 'false');
@@ -613,7 +609,6 @@
                 localStorage.setItem('musicIsPlaying', 'false');
             });
 
-            // 3. Lanjutkan pemutaran otomatis jika sebelumnya aktif
             if (isPlaying === 'true') {
                 audio.play().catch(() => {
                     const resumeAudio = () => {
