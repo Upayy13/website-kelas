@@ -291,13 +291,13 @@
     <!-- PEMUTAR MUSIK LATAR -->
     <div class="audio-player">
         <i class="fa-solid fa-music" style="color: #818cf8;"></i>
-        <audio id="bgMusicClassmeeting" controls loop>
+        <audio id="bgMusic" controls loop preload="auto">
             <source src="menari.mp3" type="audio/mpeg">
             Browser Anda tidak mendukung pemutar audio.
         </audio>
     </div>
 
-    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL & PENYELARASAN MUSIK -->
+    <!-- JAVASCRIPT UNTUK TRIGGER ANIMASI SCROLL REVEAL & SINKRONISASI MUSIK -->
     <script>
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
@@ -318,31 +318,47 @@
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
 
-        /* SKRIP PENYELARASAN DETIK MUSIK "MENARI.MP3" */
-        const audio = document.getElementById('bgMusicClassmeeting');
+        /* SKRIP PENYELARASAN DETIK & STATUS MUSIK YANG DISEMPURNAKAN */
+        (function() {
+            const audio = document.getElementById('bgMusic');
+            if (!audio) return;
 
-        // Ambil detik terakhir khusus untuk lagu menari.mp3
-        const savedTime = localStorage.getItem('menariCurrentTime');
-        if (savedTime) {
-            audio.currentTime = parseFloat(savedTime);
-        }
+            const savedTime = localStorage.getItem('musicCurrentTime');
+            const isPlaying = localStorage.getItem('musicIsPlaying');
 
-        // Simpan posisi lagu secara terus-menerus
-        audio.addEventListener('timeupdate', () => {
-            localStorage.setItem('menariCurrentTime', audio.currentTime);
-        });
-
-        // Putar audio secara otomatis
-        window.addEventListener('load', () => {
-            audio.play().catch(() => {});
-        });
-
-        // Pemulihan otomatis jika diblokir oleh kebijakan browser
-        document.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
+            if (savedTime !== null) {
+                audio.currentTime = parseFloat(savedTime);
             }
-        }, { once: true });
+
+            const saveCurrentState = () => {
+                localStorage.setItem('musicCurrentTime', audio.currentTime);
+                localStorage.setItem('musicIsPlaying', !audio.paused ? 'true' : 'false');
+            };
+
+            audio.addEventListener('timeupdate', saveCurrentState);
+            window.addEventListener('beforeunload', saveCurrentState);
+            window.addEventListener('pagehide', saveCurrentState);
+
+            audio.addEventListener('play', () => {
+                localStorage.setItem('musicIsPlaying', 'true');
+            });
+
+            audio.addEventListener('pause', () => {
+                localStorage.setItem('musicIsPlaying', 'false');
+            });
+
+            if (isPlaying === 'true') {
+                audio.play().catch(() => {
+                    const resumeAudio = () => {
+                        if (localStorage.getItem('musicIsPlaying') === 'true') {
+                            audio.play();
+                        }
+                        document.removeEventListener('click', resumeAudio);
+                    };
+                    document.addEventListener('click', resumeAudio);
+                });
+            }
+        })();
     </script>
 
 </body>
