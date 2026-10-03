@@ -581,26 +581,30 @@
         </div>
     </footer>
 
-    <!-- SKRIP SINKRONISASI MUSIK (LOCALSTORAGE) -->
+    <!-- SKRIP SINKRONISASI MUSIK YANG DISEMPURNAKAN -->
     <script>
         (function() {
             const audio = document.getElementById('bgMusic');
             if (!audio) return;
 
-            // 1. Ambil posisi detik terakhir dan status audio dari memori browser
+            // 1. Ambil posisi waktu terakhir dan status play dari memori browser saat halaman dimuat
             const savedTime = localStorage.getItem('musicCurrentTime');
             const isPlaying = localStorage.getItem('musicIsPlaying');
 
-            if (savedTime) {
+            if (savedTime !== null) {
                 audio.currentTime = parseFloat(savedTime);
             }
 
-            // 2. Simpan detik audio secara terus-menerus saat lagu berputar
-            audio.addEventListener('timeupdate', () => {
+            // 2. Simpan posisi waktu secara berkala dan pastikan tersimpan instan saat halaman akan ditutup/pindah
+            const saveCurrentState = () => {
                 localStorage.setItem('musicCurrentTime', audio.currentTime);
-            });
+                localStorage.setItem('musicIsPlaying', !audio.paused ? 'true' : 'false');
+            };
 
-            // 3. Simpan status play/pause saat pengguna menekan tombol audio
+            audio.addEventListener('timeupdate', saveCurrentState);
+            window.addEventListener('beforeunload', saveCurrentState);
+            window.addEventListener('pagehide', saveCurrentState);
+
             audio.addEventListener('play', () => {
                 localStorage.setItem('musicIsPlaying', 'true');
             });
@@ -609,10 +613,9 @@
                 localStorage.setItem('musicIsPlaying', 'false');
             });
 
-            // 4. Jika sebelumnya lagu diputar, teruskan pemutaran otomatis di halaman baru
+            // 3. Lanjutkan pemutaran otomatis jika sebelumnya aktif
             if (isPlaying === 'true') {
                 audio.play().catch(() => {
-                    // Penanganan aturan autoplay browser (perlu 1x interaksi jika terblokir)
                     const resumeAudio = () => {
                         if (localStorage.getItem('musicIsPlaying') === 'true') {
                             audio.play();
@@ -723,5 +726,4 @@
         })();
     </script>
 </body>
-    </html>
-    
+</html>
