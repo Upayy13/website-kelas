@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi & Kenangan Kelas - XII IPS-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FONT AWESOME UNTUK IKON RESMI EMAIL & INSTAGRAM -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(236, 72, 153, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* ANIMASI FADE-IN SAAT HALAMAN DIBUKA */
+        @keyframes pageFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 1.5rem 2rem;
+            position: relative;
+            animation: pageFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .header-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            color: #818cf8;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        /* STYLING KOTAK QUOTES DINAMIS */
+        .quote-container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 0 auto 2.5rem;
+            padding: 1.5rem 2rem;
+            background: rgba(30, 41, 59, 0.35);
+            border: 1px solid rgba(129, 140, 248, 0.2);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            text-align: center;
+            position: relative;
+            animation: pageFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .quote-icon {
+            color: #818cf8;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .quote-text {
+            font-size: 1.05rem;
+            font-style: italic;
+            color: #e2e8f0;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .quote-author {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #818cf8;
+            letter-spacing: 0.3px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 2rem;
+            margin-top: 2.5rem;
+            animation: pageFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #f8fafc;
+        }
+
+        /* GRID ALBUM & LAYANAN */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.75rem;
+        }
+
+        /* GRID PROFIL SISWA: KONSISTEN 2 KOLOM DI SEMUA UKURAN LAYAR */
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        /* EFEK DYNAMIC BLUR & SCALE SAAT HOVER */
+        .card, .student-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                        border-color 0.4s ease, 
+                        box-shadow 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-link:hover .card, .student-card:hover {
+            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(129, 140, 248, 0.5);
+            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(99, 102, 241, 0.3);
+        }
+
+        .img-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+        }
+
+        /* UKURAN FOTO SISWA DENGAN RASIO 1:1 (PERSEGI) */
+        .student-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        .card img, .student-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-link:hover img, .student-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card-content, .student-content {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-content h3, .student-content h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #f1f5f9;
+            margin-bottom: 0.4rem;
+            transition: color 0.3s ease;
+        }
+
+        .card-link:hover .card-content h3 {
+            color: #818cf8;
+        }
+
+        .card-content p {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #64748b;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* STYLING DETAIL SISWA */
+        .student-info {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .student-info i {
+            color: #818cf8;
+            width: 14px;
+        }
+
+        .student-motivation {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #94a3b8;
+            margin-top: 0.6rem;
+            padding-top: 0.6rem;
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+            line-height: 1.35;
+            flex-grow: 1;
+        }
+
+        /* KHUSUS PERANGKAT HP / MOBILE */
+        @media (max-width: 640px) {
+            .students-grid {
+                gap: 0.75rem;
+            }
+            .student-content {
+                padding: 0.75rem;
+            }
+            .student-content h3 {
+                font-size: 0.95rem;
+            }
+            .student-info, .student-motivation {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* KELAS REVEAL TAMPIL SECARA LANGSUNG */
+        .reveal {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: auto;
+            background: rgba(15, 23, 42, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 3rem 1.5rem 1.5rem;
+            color: #94a3b8;
+        }
+
+        .footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .footer-column h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.3px;
+        }
+
+        .footer-column p, 
+        .footer-column a {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            line-height: 1.5;
+            text-decoration: none;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .footer-column a:hover {
+            color: #818cf8;
+            transform: translateX(3px);
+        }
+
+        .footer-column i {
+            font-size: 1rem;
+            width: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .fa-school { color: #38bdf8; }
+        .fa-location-dot { color: #f43f5e; }
+        .fa-envelope { color: #ea4335; }
+        .fa-instagram { color: #e1306c; }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            max-width: 1100px;
+            margin: 2.5rem auto 0;
+            padding-top: 1.25rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="header-tag">Memori Kelas</span>
+        <h1>Lensa Kebersamaan XII IPS-1</h1>
+        <p>Menyimpan Setiap Momen, Cerita, dan Kenangan Bersama</p>
+    </header>
+
+    <div class="container">
+        <!-- KOTAK QUOTES DINAMIS -->
+        <div class="quote-container">
+            <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
+            <p class="quote-text" id="quoteText">"Setiap detik di sekolah adalah cerita yang sedang kita tulis bersama."</p>
+            <span class="quote-author" id="quoteAuthor">— XII IPS-1</span>
+        </div>
+
+        <!-- 1. BAGIAN PROFIL ANGGOTA KELAS -->
+        <div class="section-header">
+            <h2 class="section-title">🎓 Profil Anggota Kelas</h2>
+        </div>
+
+        <div class="students-grid">
+            
+            <!-- Siswa 1 -->
+            <div class="student-card reveal">
+                <div class="student-img-wrapper">
+                    <img src="rahma.jpg" alt="Foto Rahma Meilandi" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="student-content">
+                    <h3>Rahma Meilandi</h3>
+                    <div class="student-info"><i class="fa-solid fa-cake-candles"></i> 13 Mei 2009</div>
+                    <div class="student-info"><i class="fa-solid fa-graduation-cap"></i> Owner Joyya Mart</div>
+                    <div class="student-motivation">"Jangan mudah percaya sama orang asing nanti di rip"</div>
+                </div>
+            </div>
+
+            <!-- Siswa 2 -->
+            <div class="student-card reveal">
+                <div class="student-img-wrapper">
+                    <img src="nanda.jpg" alt="Foto Nanda" onerror="this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="student-content">
+                    <h3>Nanda</h3>
+                    <div class="student-info"><i class="fa-solid fa-cake-candles"></i> 10 April 2009</div>
+                    <div class="student-info"><i class="fa-solid fa-graduation-cap"></i> Guru / Psikolog</div>
+                    <div class="student-motivation">"Belajar bukan beban, tapi bekal. Belajar adalah jembatan menuju impian dan kesuksesan."</div>
+                </div>
+            </div>
+
+            <!-- Siswa 3 -->
+            <div class="student-card reveal">
+                <div class="student-img-wrapper">
+                    <img src="renzi.jpg" alt="Foto Renzi Novelia Putri" onerror="this.src='https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="student-content">
+                    <h3>Renzi Novelia Putri</h3>
+                    <div class="student-info"><i class="fa-solid fa-cake-candles"></i> 04 November 2008</div>
+                    <div class="student-info"><i class="fa-solid fa-graduation-cap"></i> Pengusaha</div>
+                    <div class="student-motivation">"Jangan mencari jalan pintas, karena hidup itu butuh proses. Dari proses itulah kita belajar caranya menjadi manusia yang kuat."</div>
+                </div>
+            </div>
+
+            <!-- Siswa 4 -->
+            <div class="student-card reveal">
+                <div class="student-img-wrapper">
+                    <img src="wulan.jpg" alt="Foto Putri Wulandari" onerror="this.src='https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80'">
+                </div>
+                <div class="student-content">
+                    <h3>Putri Wulandari</h3>
+                    <div class="student-info"><i class="fa-solid fa-cake-candles"></i> 21 Maret 2008</div>
+                    <div class="student-info"><i class="fa-solid fa-graduation-cap"></i> -</div>
+                    <div class="student-motivation">"Apa yang sudah ditakar tidak akan tertukar, dan apa yang menjadi takdir sudah pasti akan hadir.."</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 2. BAGIAN ALBUM & LAYANAN KELAS -->
+        <div class="section-header">
+            <h2 class="section-title">📸 Album & Layanan Kelas</h2>
+        </div>
+
+        <div class="gallery-grid">
+            
+            <!-- Album 1: Hari Batik -->
+            <a href="hari-batik.html" class="card-link reveal">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="Batik1.jpg" alt="Hari Batik" onerror="this.src='https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Hari Batik Nasional</h3>
+                        <p>Kumpulan foto dan cerita saat memakai baju batik bersama.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Album 2: Classmeeting -->
+            <a href="classmeeting.html" class="card-link reveal">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="Classmeeting1.jpg" alt="Classmeeting" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Classmeeting Semester</h3>
+                        <p>Keseruan perlombaan dan momen perjuangan kelas.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Album 3: Buka Bersama -->
+            <a href="bukber.html" class="card-link reveal">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="Bukber1.jpg" alt="Buka Bersama" onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80'">
+                    </div>
+                    <div class="card-content">
+                        <h3>Buka Puasa Bersama</h3>
+                        <p>Hangatnya kebersamaan dan silaturahmi saat bulan Ramadhan.</p>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Layanan Pengaduan -->
+            <a href="pengaduan.html" class="card-link reveal">
+                <div class="card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80" alt="Layanan Pengaduan">
+                    </div>
+                    <div class="card-content">
+                        <h3>Layanan Pengaduan Kelas</h3>
+                        <p>Sampaikan laporan atau aspirasi tingkah laku demi kenyamanan bersama.</p>
+                        <div class="date">📣 Layanan Aktif</div>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h4><i class="fa-solid fa-school"></i> MAN 1 BANGKA</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Jl. Batin Tikal, Air Ruai</p>
+            </div>
+            <div class="footer-column">
+                <h4>Kontak</h4>
+                <a href="mailto:man1bangka@gmail.com">
+                    <i class="fa-solid fa-envelope"></i> man1bangka@gmail.com
+                </a>
+                <a href="https://instagram.com/man1bangka" target="_blank">
+                    <i class="fa-brands fa-instagram"></i> @man1bangka
+                </a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 Portal Resmi XII IPS-1. Semua Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        const quotesList = [
+            {
+                text: "Masa-masa SMA tidak akan pernah terulang kembali, jadikan setiap harinya berharga.",
+                author: "— Kebersamaan XII IPS-1"
+            },
+            {
+                text: "Bukan tentang ke mana kita pergi, melainkan dengan siapa kita berbagi perjalanan ini.",
+                author: "— Keluarga IPS-1"
+            },
+            {
+                text: "Suatu hari nanti, kita akan merindukan ruang kelas yang bising ini.",
+                author: "— Kenangan Masa Sekolah"
+            },
+            {
+                text: "Teman sejati tidak hanya hadir saat tertawa, tapi juga bertahan di setiap perjuangan.",
+                author: "— Persahabatan IPS-1"
+            },
+            {
+                text: "Teruslah berjuang, hari ini kita belajar bersama, esok kita sukses bersama.",
+                author: "— Semangat Lulus"
+            },
+            {
+                text: "Simpan cerita ini, kelak akan menjadi alasan terbaik untuk kita tersenyum kembali.",
+                author: "— Catatan Akhir Sekolah"
+            }
+        ];
+
+        function displayRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotesList.length);
+            const selectedQuote = quotesList[randomIndex];
+            
+            document.getElementById('quoteText').textContent = `"${selectedQuote.text}"`;
+            document.g
