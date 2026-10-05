@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dokumentasi Hari Batik Nasional</title>
+    <title>Dokumentasi Kegiatan - XII IPS-1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -43,11 +43,11 @@
         .photo-item:hover .photo-caption h3 { color: #818cf8; }
         .photo-caption p { margin: 0; line-height: 1.6; color: #94a3b8; font-size: 0.975rem; }
         
-        /* PEMUTAR MUSIK (DI KANAN BAWAH) */
+        /* PEMUTAR MUSIK LATAR */
         .audio-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(129, 140, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 30px; padding: 8px 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px; }
         .audio-player audio { height: 35px; outline: none; }
 
-        /* FITUR SCROLL TO TOP (DIKONDISIKAN DI SEBELAH KIRI AGAR TIDAK BENTROK DENGAN PEMUTAR MUSIK) */
+        /* TOMBOL GULIR KE ATAS (SCROLL TO TOP) */
         .scroll-top-btn {
             position: fixed;
             bottom: 20px;
@@ -55,7 +55,7 @@
             z-index: 1000;
             width: 45px;
             height: 45px;
-            background: rgba(30, 41, 59, 0.9);
+            background: rgba(30, 41, 59, 0.85);
             border: 1px solid rgba(129, 140, 248, 0.4);
             color: #818cf8;
             border-radius: 50%;
@@ -71,13 +71,11 @@
             transform: translateY(15px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         .scroll-top-btn.show {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-
         .scroll-top-btn:hover {
             background: rgba(99, 102, 241, 0.3);
             color: #ffffff;
@@ -89,7 +87,6 @@
             .audio-player { bottom: 10px; right: 10px; left: 10px; justify-content: center; }
             .scroll-top-btn { bottom: 75px; left: 20px; }
         }
-
         .reveal { opacity: 0; transform: translateY(40px) scale(0.97); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0) scale(1); }
     </style>
@@ -98,58 +95,56 @@
 
     <header>
         <span class="header-tag">Dokumentasi Acara</span>
-        <h1>Hari Batik Nasional</h1>
-        <p>Dokumentasi Kegiatan Kebersamaan Kelas XII IPS 1</p>
+        <h1>Kegiatan Kelas</h1>
+        <p>Berbagai agenda penting, proyek belajar, dan acara seru yang diikuti XII IPS-1</p>
         <a href="index.html" class="back-btn">← Kembali ke Halaman Utama</a>
     </header>
 
     <div class="container">
         <div class="photo-list">
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Batik1.jpg" alt="Foto Bersama"></div>
+                <div class="img-wrapper"><img src="Kegiatan1.jpg" alt="Kegiatan 1"></div>
                 <div class="photo-caption">
-                    <h3>1. Pose Santai di Aula Sekolah</h3>
-                    <p>Momen kebersamaan dan keceriaan para siswa laki-laki saat bersantai duduk lesehan di aula sekolah. Mengenakan pakaian batik dengan berbagai gaya dan pose unik yang mencerminkan keakraban serta kekompakan persahabatan mereka.</p>
+                    <h3>1. Atribut dan Kostum Unik</h3>
+                    <p> Para siswa tampil sangat kreatif dan semarak diacara panggung literasi dengan mengenakan berbagai busana dan atribut khas perjuangan serta tradisional. Ada yang membawa bendera merah putih lengkap dengan atribut pejuang kemerdekaan, mengenakan pakaian adat tradisional, busana bernuansa loreng/militer, bambu runcing, properti replika senjata, hingga hiasan kepala khas kemerdekaan. </p>
                 </div>
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Batik2.jpg" alt="Wali Kelas"></div>
+                <div class="img-wrapper"><img src="Kegiatan2.jpg" alt="Kegiatan 2"></div>
                 <div class="photo-caption">
-                    <h3>2. Foto Bersama Seluruh Anggota Kelas</h3>
-                    <p>Momen kebersamaan seluruh siswa-siswi kelas XII IPS 1 dalam balutan pakaian batik dan kebaya yang anggun serta rapi. Semua berkumpul bersama dengan senyuman dan pose ceria untuk mengabadikan kenangan istimewa hari itu.</p>
+                    <h3>2. Proyek Presentasi dan Diskusi Kelas</h3>
+                    <p>Dokumentasi saat perwakilan kelompok memaparkan hasil kerja proyek di depan kelas. Melatih rasa percaya diri, kemampuan komunikasi, serta kerja sama tim yang solid dalam bidang akademik.</p>
                 </div>
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Batik3.jpg" alt="Foto Unik"></div>
+                <div class="img-wrapper"><img src="Kegiatan3.jpg" alt="Kegiatan 3"></div>
                 <div class="photo-caption">
-                    <h3>3. Foto Unik</h3>
-                    <p>Potret ekspresif enam siswa dengan pengambilan gambar dari sudut bawah (low angle) yang keren. Memperlihatkan gaya santai, serta pose peace dan swag yang penuh energi dan percaya diri.</p>
+                    <h3>3. Kegiatan Ekstrakurikuler dan Luar Kelas</h3>
+                    <p>Keseruan siswa-siswi kelas saat terlibat dalam kegiatan di luar jam pelajaran biasa. Suasana yang lebih santai mempererat keakraban dan menciptakan kenangan tak terlupakan selama masa sekolah.</p>
                 </div>
             </div>
 
-            <!-- FOTO BARU PERTAMA -->
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Batik4.jpg" alt="Gaya Anggun Siswi Berkerudung"></div>
+                <div class="img-wrapper"><img src="Kegiatan4.jpg" alt="Kegiatan 4"></div>
                 <div class="photo-caption">
-                    <h3>4. Pesona Anggun Busana Nusantara Siswi</h3>
-                    <p>Potret kebersamaan para siswi kelas XII IPS-1 yang tampil anggun dan kompak berjejer rapi[span_0](start_span)[span_0](end_span). Masing-masing mengenakan balutan busana tradisional bernuansa batik dan kebaya berpadu hijab yang serasi, menciptakan suasana kebersamaan yang hangat dan penuh warna[span_1](start_span)[span_1](end_span).</p>
+                    <h3>4. Perayaan dan Momen Kebersamaan Spesial</h3>
+                    <p>Potret kebahagiaan saat merayakan momen-momen tertentu bersama seluruh warga kelas. Tawa dan senyum ceria memperkuat ikatan kekeluargaan yang terjalin erat di dalam kelas XII IPS-1.</p>
                 </div>
             </div>
 
-            <!-- FOTO BARU KEDUA -->
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Batik5.jpg" alt="Formasi Lengkap Siswa dan Siswi"></div>
+                <div class="img-wrapper"><img src="Kegiatan5.jpg" alt="Kegiatan 5"></div>
                 <div class="photo-caption">
-                    <h3>5. Formasi Lengkap Kebersamaan Kelas</h3>
-                    <p>Dokumentasi formasi lengkap seluruh siswa dan siswi kelas XII IPS-1 yang berpose bersama dalam balutan ragam busana batik[span_2](start_span)[span_2](end_span). Terlihat barisan siswi berdiri di belakang dengan senyuman ramah sementara para siswa duduk di depan dengan berbagai gaya kasual dan ekspresif, menunjukkan eratnya keakraban di dalam kelas[span_3](start_span)[span_3](end_span).</p>
+                    <h3>5. Gotong Royong dan Kerja Bakti Kelas</h3>
+                    <p>Aksi kepedulian bersama dalam menjaga kebersihan serta kenyamanan ruang kelas. Saling bahu-membahu membersihkan lingkungan sekitar menunjukkan rasa tanggung jawab sosial yang tinggi dari setiap siswa.</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- TOMBOL SCROLL TO TOP -->
+    <!-- TOMBOL GULIR KE ATAS -->
     <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Kembali ke atas">
         <i class="fa-solid fa-arrow-up"></i>
     </button>
@@ -179,7 +174,6 @@
 
         // SKRIP LOGIKA SCROLL TO TOP
         const scrollTopBtn = document.getElementById('scrollTopBtn');
-        
         window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
                 scrollTopBtn.classList.add('show');

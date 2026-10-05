@@ -68,7 +68,6 @@
         .modal-card { background: #1e293b; border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 20px; width: 100%; max-width: 400px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .modal-overlay.active .modal-card { transform: scale(1); }
         
-        /* Ukuran Foto Pop-Up Rasio 1:1 */
         .modal-img-wrapper { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
         .modal-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         
@@ -152,6 +151,27 @@
                 <h2 class="section-title">📸 Album Kegiatan Kelas</h2>
             </div>
             <div class="gallery-grid">
+                <!-- Album Kegiatan -->
+                <a href="kegiatan.html" class="card-link">
+                    <div class="card">
+                        <div class="img-wrapper"><img src="Kegiatan1.jpg" alt="Kegiatan Kelas" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'"></div>
+                        <div class="card-content">
+                            <h3>Kegiatan</h3>
+                            <p>Dokumentasi berbagai macam aktivitas dan acara seru kelas.</p>
+                        </div>
+                    </div>
+                </a>
+                <!-- Album Keseharian -->
+                <a href="keseharian.html" class="card-link">
+                    <div class="card">
+                        <div class="img-wrapper"><img src="Keseharian1.jpg" alt="Keseharian Kelas" onerror="this.src='https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80'"></div>
+                        <div class="card-content">
+                            <h3>Keseharian</h3>
+                            <p>Potret kebersamaan dan rutinitas sehari-hari anak-anak di kelas.</p>
+                        </div>
+                    </div>
+                </a>
+                <!-- Album Hari Batik -->
                 <a href="hari-batik.html" class="card-link">
                     <div class="card">
                         <div class="img-wrapper"><img src="Batik1.jpg" alt="Hari Batik" onerror="this.src='https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&w=800&q=80'"></div>
@@ -161,6 +181,7 @@
                         </div>
                     </div>
                 </a>
+                <!-- Album Classmeeting -->
                 <a href="classmeeting.html" class="card-link">
                     <div class="card">
                         <div class="img-wrapper"><img src="Classmeeting1.jpg" alt="Classmeeting" onerror="this.src='https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80'"></div>
@@ -170,6 +191,7 @@
                         </div>
                     </div>
                 </a>
+                <!-- Album Buka Bersama -->
                 <a href="bukber.html" class="card-link">
                     <div class="card">
                         <div class="img-wrapper"><img src="Bukber1.jpg" alt="Buka Bersama" onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=800&q=80'"></div>
@@ -200,7 +222,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal-overlay" id="studentModal">
         <div class="modal-card">
             <div class="modal-img-wrapper">
