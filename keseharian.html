@@ -103,7 +103,7 @@
     <div class="container">
         <div class="photo-list">
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Keseharian1.jpg" alt="Suasana Pagi di Kelas"></div>
+                <div class="img-wrapper"><img src="keseharian1.jpg" alt="Suasana Pagi di Kelas" loading="lazy"></div>
                 <div class="photo-caption">
                     <h3>1. Suasana Hangat Sebelum Pelajaran Dimulai</h3>
                     <p>Momen santai di pagi hari sebelum bel masuk berbunyi. Obrolan seru, canda tawa, dan saling bertukar cerita antar teman sekelas menjadi awal yang sempurna untuk menjalani hari penuh semangat di lingkungan XII IPS-1.</p>
@@ -111,34 +111,34 @@
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Keseharian2.jpg" alt="Diskusi Kelompok"></div>
+                <div class="img-wrapper"><img src="keseharian2.jpg" alt="Keseruan di Dalam Kelas" loading="lazy"></div>
                 <div class="photo-caption">
-                    <h3>2. Kerja Sama dan Diskusi Kelompok Belajar</h3>
-                    <p>Kekompakan anak-anak saat berdiskusi dan menyelesaikan tugas kelompok bersama. Saling membantu memahami materi pelajaran menunjukkan betapa solidnya rasa kekeluargaan di dalam kelas ini.</p>
+                    <h3>2. Momen Seru di Dalam Kelas</h3>
+                    <p>Momen seru saat anak-anak berkumpul dan berpose bersama di dalam kelas dengan latar belakang tulisan di dinding.</p>
                 </div>
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Keseharian3.jpg" alt="Jam Istirahat Kelas"></div>
+                <div class="img-wrapper"><img src="keseharian3.jpg" alt="Diskusi Kelompok Belajar" loading="lazy"></div>
                 <div class="photo-caption">
-                    <h3>3. Keseruan Waktu Istirahat di Kelas</h3>
-                    <p>Waktu istirahat yang paling dinanti-nantikan untuk sekadar berkumpul, jajan bersama di kantin, atau bersantai menikmati waktu luang bersama teman-teman akrab sebelum kembali fokus ke kelas.</p>
+                    <h3>3. Diskusi Kelompok di Lantai Kelas</h3>
+                    <p>Suasana serius tapi santai saat teman-teman duduk melingkar di lantai kelas untuk berdiskusi atau belajar bersama.</p>
                 </div>
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Keseharian4.jpg" alt="Aktivitas Kreatif"></div>
+                <div class="img-wrapper"><img src="keseharian4.jpg" alt="Rekreasi Bersama di Pantai" loading="lazy"></div>
                 <div class="photo-caption">
-                    <h3>4. Kreativitas Tanpa Batas di Jam Kosong</h3>
-                    <p>Ekspresi keceriaan dan kreativitas spontan dari anak-anak ketika menghadapi jam kosong atau waktu luang. Selalu ada ide-ide seru yang membuat suasana kelas tidak pernah terasa membosankan.</p>
+                    <h3>4. Rekreasi Bersama di Pantai</h3>
+                    <p>Keseruan luar biasa saat anak-anak XII IPS-1 berekreasi dan berfoto bersama di area pantai dengan latar belakang pemandangan alam dan bebatuan.</p>
                 </div>
             </div>
 
             <div class="photo-item reveal">
-                <div class="img-wrapper"><img src="Keseharian5.jpg" alt="Kebersamaan Pulang Sekolah"></div>
+                <div class="img-wrapper"><img src="keseharian5.jpg" alt="Kompak Mengenakan Pakaian Adat dan Seragam" loading="lazy"></div>
                 <div class="photo-caption">
-                    <h3>5. Momen Menjelang Pulang Sekolah</h3>
-                    <p>Potret kebersamaan penutup hari sebelum bergegas pulang ke rumah masing-masing. Berpamitan, merapikan meja, dan membawa pulang kenangan indah dari hari yang telah dilalui bersama.</p>
+                    <h3>5. Kebersamaan Seragam dan Pakaian Adat</h3>
+                    <p>Potret kebersamaan seluruh anggota kelas mengenakan seragam olahraga dan pakaian adat saat berpose di luar ruangan dekat dinding sekolah.</p>
                 </div>
             </div>
         </div>
@@ -162,10 +162,10 @@
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             const windowHeight = window.innerHeight;
-            reveals.forEach((element, index) => {
+            reveals.forEach((element) => {
                 const elementTop = element.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 100) {
-                    setTimeout(() => { element.classList.add('active'); }, index * 100); 
+                if (elementTop < windowHeight - 50) {
+                    element.classList.add('active'); 
                 }
             });
         }
