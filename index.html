@@ -37,7 +37,25 @@
         header h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(135deg, #ffffff 0%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.75rem; letter-spacing: -0.5px; }
         header p { color: #94a3b8; font-size: 1.05rem; max-width: 500px; margin: 0 auto; line-height: 1.6; }
         
-        .quick-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 2rem; animation: pageFadeIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .sticky-nav-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 1rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2.5rem;
+        }
+        .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+        .quick-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .nav-pill { background: rgba(30, 41, 59, 0.6); border: 1px solid rgba(129, 140, 248, 0.3); color: #cbd5e1; padding: 8px 18px; border-radius: 25px; font-size: 0.9rem; font-weight: 600; text-decoration: none; backdrop-filter: blur(10px); transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; }
         .nav-pill:hover, .nav-pill.active { background: rgba(99, 102, 241, 0.25); border-color: #818cf8; color: #ffffff; transform: translateY(-2px); }
 
@@ -49,7 +67,6 @@
         .quote-author { font-size: 0.85rem; font-weight: 700; color: #818cf8; letter-spacing: 0.3px; transition: opacity 0.3s ease; opacity: 1; }
         .quote-hint { font-size: 0.7rem; color: #64748b; margin-top: 0.5rem; display: block; }
         
-        /* Style untuk Foto Utama ukuran 9:16 di bawah Quotes */
         .hero-photo-section {
             max-width: 420px;
             margin: 0 auto 3rem;
@@ -101,22 +118,6 @@
         .detail-btn { background: rgba(99, 102, 241, 0.2); border: 1px solid rgba(129, 140, 248, 0.4); color: #818cf8; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; }
         .detail-btn:hover { background: rgba(99, 102, 241, 0.4); color: #ffffff; transform: translateY(-2px); }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-card { background: #1e293b; border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 20px; width: 100%; max-width: 400px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-        .modal-overlay.active .modal-card { transform: scale(1); }
-        
-        .modal-img-wrapper { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
-        .modal-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        
-        .modal-close-btn { position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.7); border: none; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.2s ease; z-index: 10; }
-        .modal-close-btn:hover { background: rgba(239, 68, 68, 0.8); }
-        .modal-body { padding: 1.5rem; }
-        .modal-body h3 { font-size: 1.3rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem; }
-        .modal-info { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
-        .modal-info i { color: #818cf8; width: 16px; }
-        .modal-motivation { font-size: 0.9rem; font-style: italic; color: #94a3b8; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255, 255, 255, 0.1); line-height: 1.5; }
-
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.75rem; }
         .card-link { text-decoration: none; color: inherit; display: block; }
         .card { background: rgba(30, 41, 59, 0.4); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; overflow: hidden; backdrop-filter: blur(12px); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease; height: 100%; display: flex; flex-direction: column; }
@@ -150,6 +151,20 @@
         .footer-column i { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
         .fa-school { color: #38bdf8; } .fa-location-dot { color: #f43f5e; } .fa-envelope { color: #ea4335; } .fa-instagram { color: #e1306c; }
         .copyright { font-size: 0.8rem; color: #64748b; border-top: 1px solid rgba(255, 255, 255, 0.06); max-width: 1100px; margin: 2.5rem auto 0; padding-top: 1.25rem; text-align: center; }
+
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 15, 25, 0.8); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 2000; opacity: 0; visibility: hidden; transition: all 0.3s ease; padding: 1rem; }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        .modal-card { background: #1e293b; border: 1px solid rgba(129, 140, 248, 0.3); border-radius: 20px; width: 100%; max-width: 400px; overflow: hidden; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .modal-overlay.active .modal-card { transform: scale(1); }
+        .modal-img-wrapper { width: 100%; aspect-ratio: 1 / 1; position: relative; overflow: hidden; }
+        .modal-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .modal-close-btn { position: absolute; top: 15px; right: 15px; background: rgba(15, 23, 42, 0.7); border: none; color: #ffffff; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; backdrop-filter: blur(5px); transition: background 0.2s ease; z-index: 10; }
+        .modal-close-btn:hover { background: rgba(239, 68, 68, 0.8); }
+        .modal-body { padding: 1.5rem; }
+        .modal-body h3 { font-size: 1.3rem; font-weight: 700; color: #f8fafc; margin-bottom: 0.75rem; }
+        .modal-info { font-size: 0.9rem; color: #cbd5e1; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 8px; }
+        .modal-info i { color: #818cf8; width: 16px; }
+        .modal-motivation { font-size: 0.9rem; font-style: italic; color: #94a3b8; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed rgba(255, 255, 255, 0.1); line-height: 1.5; }
     </style>
 </head>
 <body>
@@ -160,13 +175,16 @@
         <p>Menyimpan Setiap Momen, Cerita, dan Kenangan Bersama</p>
     </header>
 
-    <div class="container">
-        <div class="quick-nav">
-            <a href="#profil" class="nav-pill"><i class="fa-solid fa-users"></i> Profil Kelas</a>
-            <a href="#album" class="nav-pill"><i class="fa-solid fa-images"></i> Album Kegiatan</a>
-            <a href="#pengaduan" class="nav-pill"><i class="fa-solid fa-bullhorn"></i> Layanan Pengaduan</a>
+    <div class="sticky-nav-wrapper">
+        <div class="nav-inner">
+            <div class="quick-nav">
+                <a href="#profil" class="nav-pill"><i class="fa-solid fa-users"></i> Profil Kelas</a>
+                <a href="#album" class="nav-pill"><i class="fa-solid fa-images"></i> Album Kegiatan</a>
+                <a href="#pengaduan" class="nav-pill"><i class="fa-solid fa-bullhorn"></i> Layanan Pengaduan</a>
+            </div>
         </div>
-
+    </div>
+    <div class="container">
         <div class="quote-container" id="quoteBox">
             <div class="quote-icon"><i class="fa-solid fa-quote-left"></i></div>
             <p class="quote-text" id="quoteText">"Memuat kata-kata..."</p>
@@ -174,7 +192,6 @@
             <span class="quote-hint">(Ketuk untuk ganti kata-kata)</span>
         </div>
 
-        <!-- Foto Utama 9:16 di bawah Quotes -->
         <div class="hero-photo-section">
             <div class="hero-photo-wrapper">
                 <img src="keluarga-besar.jpg" alt="Keluarga Besar XII IPS 1" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'">
@@ -196,7 +213,7 @@
             <div class="section-header">
                 <h2 class="section-title">📸 Album Kegiatan Kelas</h2>
             </div>
-                     <div class="gallery-grid">
+            <div class="gallery-grid">
                 <a href="kegiatan.html" class="card-link">
                     <div class="card">
                         <div class="img-wrapper"><img src="Kegiatan1.jpg" alt="Kegiatan Kelas" onerror="this.src='https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80'"></div>
@@ -341,15 +358,21 @@
         ];
 
         const container = document.getElementById('studentListContainer');
-        studentsData.forEach((student, index) => {
-            const item = document.createElement('div');
-            item.className = 'student-list-item';
-            item.innerHTML = `
-                <span class="student-name">${index + 1}. ${student.name}</span>
-                <button class="detail-btn" onclick="openStudentModal(${index})">Detail</button>
-            `;
-            container.appendChild(item);
-        });
+
+        function renderStudents() {
+            container.innerHTML = '';
+            studentsData.forEach((student, index) => {
+                const item = document.createElement('div');
+                item.className = 'student-list-item';
+                item.innerHTML = `
+                    <span class="student-name">${index + 1}. ${student.name}</span>
+                    <button class="detail-btn" onclick="openStudentModal(${index})">Detail</button>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        renderStudents();
 
         const modalOverlay = document.getElementById('studentModal');
         const modalImg = document.getElementById('modalImg');
@@ -383,7 +406,10 @@
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const headerOffset = 100;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
                 }
             });
         });
