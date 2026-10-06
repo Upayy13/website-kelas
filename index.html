@@ -7,6 +7,16 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KN5GQ9D0R"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8KN5GQ9D0R');
+    </script>
+
     <title>Dokumentasi & Kenangan Kelas - XII IPS-1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -202,7 +212,7 @@
         <div id="profil" class="section-header">
             <h2 class="section-title">🎓 Profil Anggota Kelas</h2>
         </div>
-
+        
         <div class="students-list-container" id="studentListContainer"></div>
 
         <div class="class-banner">
@@ -261,8 +271,7 @@
                 </a>
             </div>
         </div>
-
-        <div id="pengaduan" class="section-space">
+<div id="pengaduan" class="section-space">
             <div class="section-header">
                 <h2 class="section-title">📢 Layanan Aspirasi & Pengaduan</h2>
             </div>
@@ -479,7 +488,7 @@
                 { text: "Jadikan setiap rintangan sebagai batu pijakan, dan jadikan teman sekelas sebagai pendorong keberhasilan.", author: "— Impian XII IPS-1" }
             ];
 
-            let activeIdx = -1, timerId = null;
+                        let activeIdx = -1, timerId = null;
 
             function renderQuote() {
                 const elText = document.getElementById('quoteText');
