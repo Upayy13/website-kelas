@@ -434,11 +434,13 @@
                     thankYouContainer.style.display = 'block';
                     document.getElementById('complaintForm').reset();
                 }, function(error) {
-                    console.error('Error Email:', error);
-                    alert('Gagal mengirim pengaduan, silakan coba lagi.');
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
-                });
+    console.error('Error Email:', error);
+    // Ubah alert di bawah ini untuk melihat pesan error aslinya
+    alert('Gagal: ' + JSON.stringify(error)); 
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
+});
+
         });
 
         function resetPage() {
