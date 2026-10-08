@@ -3,483 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form Pengaduan - XII IPS-1</title>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8KN5GQ9D0R"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-8KN5GQ9D0R');
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <title>Kotak Saran & Aspirasi Kelas</title>
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; }
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
-            color: #f1f5f9;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
             margin: 0;
-            padding: 20px 20px 90px 20px;
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.1) 0px, transparent 50%);
-            background-attachment: fixed;
+            padding: 20px;
         }
-
-        @keyframes cardFadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-
-        .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 40px 30px;
-            width: 100%;
-            max-width: 520px;
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-            animation: cardFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: linear-gradient(90deg, #38bdf8, #818cf8);
-        }
-
-        .form-header {
+        h2 {
             text-align: center;
+            color: #58a6ff;
             margin-bottom: 25px;
         }
-        .form-header .tag {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            color: #38bdf8;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .form-group {
+            margin-bottom: 20px;
         }
-        h2 { margin: 0; color: #f8fafc; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; }
-
-        .form-group { margin-bottom: 18px; }
-        .form-row { display: flex; gap: 12px; }
-        .form-row .form-group { flex: 1; }
-
-        label { display: block; margin-bottom: 6px; font-size: 0.85rem; font-weight: 500; color: #cbd5e1; }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
         input, select, textarea {
             width: 100%;
-            padding: 12px 14px;
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: #fff;
-            font-family: inherit;
-            font-size: 0.95rem;
-            outline: none;
-            transition: all 0.3s ease;
+            padding: 12px;
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #c9d1d9;
+            box-sizing: border-box;
+            font-size: 14px;
         }
         input:focus, select:focus, textarea:focus {
-            border-color: #38bdf8;
-            background: rgba(15, 23, 42, 0.8);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+            outline: none;
+            border-color: #58a6ff;
         }
-        input:disabled { opacity: 0.5; cursor: not-allowed; }
-        option { background: #0f172a; color: #fff; }
-
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
         .checkbox-group {
             display: flex;
             align-items: center;
             gap: 10px;
             margin-bottom: 20px;
-            background: rgba(15, 23, 42, 0.3);
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .checkbox-group input { width: 18px; height: 18px; accent-color: #38bdf8; cursor: pointer; }
-        .checkbox-group label { cursor: pointer; font-size: 0.88rem; margin: 0; color: #e2e8f0; }
-
-        .warning-box {
-            background: rgba(239, 68, 68, 0.08);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-left: 3px solid #ef4444;
-            padding: 12px 14px;
-            border-radius: 0 10px 10px 0;
-            font-size: 0.82rem;
-            color: #fca5a5;
-            margin-bottom: 20px;
-            line-height: 1.5;
+        .checkbox-group input {
+            width: auto;
         }
-
         button {
             width: 100%;
-            padding: 13px;
-            background: linear-gradient(135deg, #0284c7, #0369a1);
+            padding: 12px;
+            background: #238636;
             color: white;
             border: none;
-            border-radius: 12px;
-            font-family: inherit;
-            font-weight: 600;
-            font-size: 0.95rem;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.25);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            transition: background 0.2s;
         }
         button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
-            background: linear-gradient(135deg, #0369a1, #075985);
+            background: #2ea043;
         }
-        button:disabled { background: #475569; cursor: not-allowed; transform: none; box-shadow: none; }
-
-        .footer-note {
-            margin-top: 22px;
+        .thank-you {
+            display: none;
             text-align: center;
-            font-size: 0.82rem;
-            color: #94a3b8;
-            line-height: 1.6;
+            padding: 40px 0;
         }
-        .footer-note strong { color: #38bdf8; }
-        
-        .back-link {
-            text-align: center;
-            margin-top: 15px;
+        .thank-you i {
+            font-size: 50px;
+            color: #3fb950;
+            margin-bottom: 15px;
         }
-        .back-link a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: color 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .back-link a:hover { color: #38bdf8; }
-
-        .thank-you-card { display: none; text-align: center; padding: 10px 0; animation: cardFadeIn 0.6s ease-in-out; }
-        .badge-icon {
-            width: 75px; height: 75px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            margin: 0 auto 20px auto;
-            font-size: 32px; color: #38bdf8;
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.15);
-        }
-        .subtitle { font-size: 0.8rem; color: #38bdf8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 700; }
-        .thank-you-card h3 { color: #f8fafc; margin: 0 0 15px 0; font-size: 1.4rem; }
-        .divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 20px 0; }
-        .message { color: #cbd5e1; line-height: 1.7; font-size: 0.92rem; margin-bottom: 20px; text-align: center; }
-        .quote-box {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-left: 3px solid #38bdf8;
-            padding: 14px 16px;
-            border-radius: 0 12px 12px 0;
-            font-style: italic;
-            color: #e2e8f0;
-            font-size: 0.88rem;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            box-shadow: none;
-        }
-        .btn-secondary:hover { background: rgba(255, 255, 255, 0.12); box-shadow: none; transform: translateY(-2px); }
-
-        .audio-player { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background: rgba(30, 41, 59, 0.85); border: 1px solid rgba(56, 189, 248, 0.4); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: 30px; padding: 8px 16px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5); display: flex; align-items: center; gap: 10px; }
-        .audio-player audio { height: 35px; outline: none; }
-        @media (max-width: 640px) {
-            .audio-player { bottom: 10px; right: 10px; left: 10px; justify-content: center; }
+        .alert-box {
+            background: rgba(88, 166, 255, 0.15);
+            border: 1px solid #58a6ff;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            margin-bottom: 20px;
+            color: #58a6ff;
         }
     </style>
 </head>
 <body>
 
-    <div class="glass-card">
-        <!-- Form Utama -->
-        <div id="formContainer">
-            <div class="form-header">
-                <span class="tag">Portal Aspirasi</span>
-                <h2>Form Pengaduan Kelas</h2>
-            </div>
-
-            <form id="complaintForm">
-                <div class="form-group">
-                    <label for="reporter">Nama Pelapor (Opsional)</label>
-                    <input type="text" id="reporter" placeholder="Masukkan nama kamu...">
-                </div>
-
-                <div class="checkbox-group">
-                    <input type="checkbox" id="anonymousCheck">
-                    <label for="anonymousCheck">Kirim sebagai Anonim (Sembunyikan Nama)</label>
-                </div>
-                <div class="form-group">
-                    <label for="reported">Siswa / Pihak yang Dilaporkan *</label>
-                    <select id="reported" required>
-                        <option value="" disabled selected>Pilih pihak yang dilaporkan</option>
-                        <option value="Seluruh anggota kelas XII IPS 1">Seluruh anggota kelas XII IPS 1</option>
-                        <option value="Fachry rizkiano">Fachry rizkiano</option>
-                        <option value="Fadhil alfahrozi">Fadhil alfahrozi</option>
-                        <option value="Lona Febria">Lona Febria</option>
-                        <option value="M. Joker rezzianto">M. Joker rezzianto</option>
-                        <option value="M. Satrio Nugroho">M. Satrio Nugroho</option>
-                        <option value="Meysya alfiza aini">Meysya alfiza aini</option>
-                        <option value="M. Ardin Achmad">M. Ardin Achmad</option>
-                        <option value="M. Muflih mufadhol">M. Muflih mufadhol</option>
-                        <option value="M. Rafa alfaiza">M. Rafa alfaiza</option>
-                        <option value="M. Randiansyah">M. Randiansyah</option>
-                        <option value="Nabilah kharimah">Nabilah kharimah</option>
-                        <option value="Nafrisya Salsabila">Nafrisya Salsabila</option>
-                        <option value="Nanda">Nanda</option>
-                        <option value="Natasya ramadhani. R">Natasya ramadhani. R</option>
-                        <option value="Nathan zefino">Nathan zefino</option>
-                        <option value="Olivia Azahra">Olivia Azahra</option>
-                        <option value="Putri auliya">Putri auliya</option>
-                        <option value="Putri wulandari">Putri wulandari</option>
-                        <option value="Qeisha Nabila Putri">Qeisha Nabila Putri</option>
-                        <option value="Raafi Syaputra Wijaya">Raafi Syaputra Wijaya</option>
-                        <option value="Raehan meilano">Raehan meilano</option>
-                        <option value="Rahma meilandi">Rahma meilandi</option>
-                        <option value="Rasya Rizki Wahyudi">Rasya Rizki Wahyudi</option>
-                        <option value="Rena Monalisa">Rena Monalisa</option>
-                        <option value="Renzi novelia putri">Renzi novelia putri</option>
-                        <option value="Retyan Maulana ismi">Retyan Maulana ismi</option>
-                        <option value="Reyhan Aidil Pratama">Reyhan Aidil Pratama</option>
-                        <option value="Reyhan Ihsan">Reyhan Ihsan</option>
-                        <option value="Rinto Luis fernando">Rinto Luis fernando</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="witness">Saksi Mata (Minimal 1 Siswa) *</label>
-                    <input type="text" id="witness" required placeholder="Nama siswa yang melihat/mengetahui kejadian">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="eventTime">Jam / Jam Ke- *</label>
-                        <input type="text" id="eventTime" required placeholder="Contoh: Jam ke-3">
-                    </div>
-                    <div class="form-group">
-                        <label for="eventLocation">Tempat Kejadian *</label>
-                        <input type="text" id="eventLocation" required placeholder="Contoh: Belakang Kelas">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Kategori Pengaduan *</label>
-                    <select id="category" required>
-                        <option value="" disabled selected>Pilih Kategori</option>
-                        <option value="Kedisiplinan">Kedisiplinan</option>
-                        <option value="Fasilitas Kelas">Fasilitas Kelas</option>
-                        <option value="Kenyamanan / Bullying">Kenyamanan / Bullying</option>
-                        <option value="Akademik / Kebersihan">Akademik / Kebersihan</option>
-                        <option value="Lainnya">Lainnya</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Detail Kejadian / Aspirasi *</label>
-                    <textarea id="description" rows="4" required placeholder="Jelaskan kronologi secara jelas..."></textarea>
-                </div>
-
-                <div class="warning-box">
-                    ⚠️ <strong>Penting:</strong> Laporan tanpa saksi atau bukti yang jelas serta pengaduan palsu/pencemaran nama baik akan diabaikan dan dapat dikenakan sanksi internal kelas.
-                </div>
-
-                <button type="submit" id="submitBtn">
-                    <i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan
-                </button>
-            </form>
-
-            <p class="footer-note">
-                🔒 <strong>Tidak perlu takut melapor.</strong> Identitas Anda aman dan pesan dapat dikirimkan secara anonim (rahasia).
-            </p>
-            
-            <div class="back-link">
-                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
-            </div>
+<div class="container">
+    <!-- Form Container -->
+    <div id="formContainer">
+        <h2>Kotak Saran & Aspirasi Kelas</h2>
+        
+        <div class="alert-box">
+            <i class="fa-solid fa-lightbulb"></i> Sampaikan ide, masukan, atau aspirasi membangun untuk kemajuan dan kenyamanan kelas kita bersama.
         </div>
-        <!-- Tampilan Ucapan Terima Kasih -->
-        <div id="thankYouContainer" class="thank-you-card">
-            <div class="badge-icon"><i class="fa-solid fa-shield-halved"></i></div>
-            
-            <div class="subtitle">Suaramu Sangat Berarti</div>
-            <h3>Terima Kasih Atas Keberanianmu</h3>
-            
-            <div class="divider"></div>
 
-            <p class="message">
-                Tidak semua orang berani mengambil langkah untuk bersuara. Laporan yang kamu kirimkan adalah bentuk kepedulian nyata agar lingkungan belajar kita tetap aman, adil, dan saling menghargai.
-            </p>
-
-            <div class="quote-box">
-                "Satu suara yang jujur bisa menjadi awal dari perubahan besar demi kenyamanan bersama."
+        <!-- Tambahkan action dan method agar Formspree mengenali endpoint -->
+        <form id="complaintForm" action="https://formspree.io/f/xqpeqenv" method="POST">
+            <div class="form-group">
+                <label>Nama Pengirim (Opsional)</label>
+                <input type="text" id="reporterName" name="Nama_Pengirim" placeholder="Identitas dirahasiakan jika kosong">
             </div>
 
-            <p class="message" style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px;">
-                Pesanmu telah tersimpan rapi dan akan ditindaklanjuti dengan bijak. Terima kasih sudah menjaga ruang kelas <strong>XII IPS-1</strong>.
-            </p>
+            <div class="checkbox-group">
+                <input type="checkbox" id="isAnonymous" name="Anonim" checked>
+                <label for="isAnonymous" style="margin-bottom:0; cursor:pointer;">Kirim sebagai Anonim (Sembunyikan Nama)</label>
+            </div>
 
-            <button class="btn-secondary" onclick="resetPage()">
-                <i class="fa-solid fa-rotate-right"></i> Kirim Pengaduan Lain
+            <div class="form-group">
+                <label>Kategori Saran / Aspirasi *</label>
+                <select id="category" name="Kategori" required>
+                    <option value="">-- Pilih Kategori --</option>
+                    <option value="Kebersihan & Kenyamanan Kelas">Kebersihan & Kenyamanan Kelas</option>
+                    <option value="Fasilitas & Inventaris Kelas">Fasilitas & Inventaris Kelas</option>
+                    <option value="Kegiatan / Acara Kelas">Kegiatan / Acara Kelas</option>
+                    <option value="Pembelajaran & Akademik">Pembelajaran & Akademik</option>
+                    <option value="Lainnya">Lainnya</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Isi Saran / Aspirasi *</label>
+                <textarea id="fullMessage" name="Isi_Saran" required placeholder="Tuliskan ide, kritik membangun, atau saran Anda di sini..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">
+                <i class="fa-solid fa-paper-plane"></i> Kirim Saran
             </button>
-            
-            <div class="back-link" style="margin-top: 15px;">
-                <a href="index.html"><i class="fa-solid fa-arrow-left"></i> Kembali ke Halaman Utama</a>
-            </div>
-        </div>
+        </form>
     </div>
 
-    <!-- PEMUTAR MUSIK LATAR -->
-    <div class="audio-player">
-        <i class="fa-solid fa-music" style="color: #38bdf8;"></i>
-        <audio id="bgMusic" controls loop preload="auto">
-            <source src="upayy.mp3" type="audio/mpeg">
-            Browser Anda tidak mendukung pemutar audio.
-        </audio>
+    <!-- Thank You Container -->
+    <div id="thankYouContainer" class="thank-you">
+        <i class="fa-solid fa-circle-check"></i>
+        <h3>Saran Berhasil Terkirim!</h3>
+        <p>Terima kasih, masukan dan aspirasi Anda telah diterima untuk kemajuan kelas kita bersama.</p>
+        <button onclick="location.reload()" style="margin-top: 20px; width: auto; padding: 10px 20px;">Kirim Saran Lain</button>
     </div>
+</div>
 
-    <script>
-        emailjs.init("zA_CHW2hVj2gy4WSa");
+<script>
+    const form = document.getElementById('complaintForm');
+    const formContainer = document.getElementById('formContainer');
+    const thankYouContainer = document.getElementById('thankYouContainer');
+    const submitBtn = document.getElementById('submitBtn');
 
-        const anonymousCheck = document.getElementById('anonymousCheck');
-        const reporterInput = document.getElementById('reporter');
-        const submitBtn = document.getElementById('submitBtn');
-        const formContainer = document.getElementById('formContainer');
-        const thankYouContainer = document.getElementById('thankYouContainer');
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-        anonymousCheck.addEventListener('change', function() {
-            if (this.checked) {
-                reporterInput.value = '';
-                reporterInput.disabled = true;
-                reporterInput.placeholder = "Identitas dirahasiakan (Anonim)";
-            } else {
-                reporterInput.disabled = false;
-                reporterInput.placeholder = "Masukkan nama kamu...";
+        let reporterNameInput = document.getElementById('reporterName').value.trim();
+        const isAnonymous = document.getElementById('isAnonymous').checked;
+        
+        let reporterName = (isAnonymous || reporterNameInput === '') ? 'Anonim (Dirahasiakan)' : reporterNameInput;
+        let category = document.getElementById('category').value;
+        let fullMessage = document.getElementById('fullMessage').value;
+        
+        let now = new Date();
+        let timeSent = now.toLocaleString('id-ID', { 
+            dateStyle: 'full', 
+            timeStyle: 'medium' 
+        });
+
+        // Ubah tombol jadi status loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...';
+
+        // Gunakan FormData untuk mengirim data secara stabil ke Formspree
+        const formData = new FormData();
+        formData.append('Nama_Pengirim', reporterName);
+        formData.append('Kategori', category);
+        formData.append('Isi_Saran', fullMessage);
+        formData.append('Tanggal_Kirim', timeSent);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
             }
-        });
-
-        document.getElementById('complaintForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const confirmSubmit = confirm("Apakah Anda yakin data pengaduan dan saksi mata sudah benar?");
-            if (!confirmSubmit) return;
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengirim...';
-
-            const isAnonymous = anonymousCheck.checked;
-            const reporterValue = reporterInput.value.trim();
-            const reporterName = isAnonymous || !reporterValue ? "Anonim (Rahasia)" : reporterValue;
-            
-            const reportedName = document.getElementById('reported').value;
-            const witnessName = document.getElementById('witness').value;
-            const eventTime = document.getElementById('eventTime').value;
-            const eventLocation = document.getElementById('eventLocation').value;
-            const category = document.getElementById('category').value;
-            const description = document.getElementById('description').value;
-
-            const now = new Date();
-            const timeSent = now.toLocaleString('id-ID', { dateStyle: 'medium', timeStyle: 'short' });
-
-            const fullMessage = `Waktu Kejadian: ${eventTime}\nLokasi Kejadian: ${eventLocation}\nSaksi Mata: ${witnessName}\n\nDetail Laporan:\n${description}`;
-
-            const emailParams = {
-                from_name: reporterName,
-                reported_person: reportedName,
-                witness_person: witnessName,
-                event_time: eventTime,
-                event_location: eventLocation,
-                category: category,
-                message: fullMessage,
-                timestamp: timeSent
-            };
-
-            emailjs.send('Upayy', 'template_ec614ce', emailParams)
-                .then(function(response) {
-                    formContainer.style.display = 'none';
-                    thankYouContainer.style.display = 'block';
-                    document.getElementById('complaintForm').reset();
-                }, function(error) {
-    console.error('Error Email:', error);
-    // Ubah alert di bawah ini untuk melihat pesan error aslinya
-    alert('Gagal: ' + JSON.stringify(error)); 
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
-});
-
-        });
-
-        function resetPage() {
-            thankYouContainer.style.display = 'none';
-            formContainer.style.display = 'block';
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Pengaduan';
-            reporterInput.disabled = false;
-        }
-
-        // Sinkronisasi Musik
-        (function() {
-            const audio = document.getElementById('bgMusic');
-            if (!audio) return;
-            const savedTime = localStorage.getItem('musicCurrentTime');
-            const isPlaying = localStorage.getItem('musicIsPlaying');
-            if (savedTime !== null) audio.currentTime = parseFloat(savedTime);
-
-            const saveCurrentState = () => {
-                localStorage.setItem('musicCurrentTime', audio.currentTime);
-                localStorage.setItem('musicIsPlaying', !audio.paused ? 'true' : 'false');
-            };
-
-            audio.addEventListener('timeupdate', saveCurrentState);
-            window.addEventListener('beforeunload', saveCurrentState);
-            window.addEventListener('pagehide', saveCurrentState);
-            audio.addEventListener('play', () => localStorage.setItem('musicIsPlaying', 'true'));
-            audio.addEventListener('pause', () => localStorage.setItem('musicIsPlaying', 'false'));
-
-            if (isPlaying === 'true') {
-                audio.play().catch(() => {
-                    const resumeAudio = () => {
-                        if (localStorage.getItem('musicIsPlaying') === 'true') audio.play();
-                        document.removeEventListener('click', resumeAudio);
-                    };
-                    document.addEventListener('click', resumeAudio);
+        })
+        .then(response => {
+            if (response.ok) {
+                formContainer.style.display = 'none';
+                thankYouContainer.style.display = 'block';
+                form.reset();
+            } else {
+                return response.json().then(data => {
+                    if (data.errors) {
+                        alert('Gagal: ' + data.errors.map(err => err.message).join(', '));
+                    } else {
+                        alert('Gagal mengirim saran, silakan coba lagi.');
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Saran';
                 });
             }
-        })();
-    </script>
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan jaringan atau koneksi.');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Kirim Saran';
+        });
+    });
+</script>
+
 </body>
 </html>
